@@ -1,0 +1,13 @@
+{
+  "env": {
+    "browser": true
+  },
+  "extends": [
+    "airbnb"
+  ],
+  "plugins": [
+    "import",
+    "react",
+    "jsx-a11y"
+  ]
+}

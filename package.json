@@ -5,13 +5,19 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env PORT=10888 react-scripts start",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "lint": "npx eslint './src/**/*.{js,jsx}'",
+    "lint:fix": "npx eslint './src/**/*.{js,jsx}' --fix"
   },
   "keywords": [],
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "cross-env": "^5.2.0",
+    "eslint-config-airbnb": "^17.1.1",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.14.2",
     "react-hot-loader": "^4.11.1",
     "react-scripts": "^2.1.8"
   },
