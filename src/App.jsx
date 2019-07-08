@@ -1,34 +1,59 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { View } from '@vkontakte/vkui';
-import { setActivePanel as setActivePanelAction } from './actions';
+import { Epic, View } from '@vkontakte/vkui';
+import Tabbar from './components/Tabbar';
+import { setActiveLayout as setActiveLayoutAction } from './redux/layout';
 import '@vkontakte/vkui/dist/vkui.css';
 
-import Home from './panels/Home';
-import Persik from './panels/Persik';
+import Home from './panels/Home/index';
 
-const App = ({ activePanel, setActivePanel }) => {
-  const switchPanel = panel => setActivePanel(panel);
+// TODO: обрабатывать activePanel
+const App = ({ layout: { activeStory, activePanel }, setActiveLayout }) => {
+  const switchLayout = layout => () => setActiveLayout(layout);
   return (
-    <View activePanel={activePanel}>
-      <Home id="home" go={switchPanel} />
-      <Persik id="persik" go={switchPanel} />
-    </View>
+    <Epic
+      activeStory={activeStory}
+      tabbar={(
+        <Tabbar
+          activeStory={activeStory}
+          middleIcon="play"
+          onClick={switchLayout}
+        />
+      )}
+    >
+      <View id="sets" activePanel="home">
+        <Home id="home" go={() => {}} />
+      </View>
+      <View id="control" activePanel="viewSet">
+        <Home id="viewSet" go={() => {}} />
+        <Home id="editSet" go={() => {}} />
+        <Home id="learnSet" go={() => {}} />
+      </View>
+      <View id="profile" activePanel="profile">
+        <Home id="profile" go={() => {}} />
+      </View>
+    </Epic>
   );
 };
 
 App.propTypes = {
-  activePanel: PropTypes.string.isRequired,
-  setActivePanel: PropTypes.func.isRequired,
+  layout: PropTypes.shape({
+    activeStory: PropTypes.string.isRequired,
+    activePanel: PropTypes.string,
+  }).isRequired,
+  setActiveLayout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  activePanel: state.activePanel,
+  layout: state.layout,
 });
 
 const mapDispatchToProps = dispatch => ({
-  setActivePanel: activePanel => dispatch(setActivePanelAction(activePanel)),
+  setActiveLayout: (activeStory, activePanel = undefined) => dispatch(setActiveLayoutAction({
+    activeStory,
+    activePanel,
+  })),
 });
 
 export default connect(

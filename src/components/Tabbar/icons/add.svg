@@ -1,0 +1,35 @@
+<svg width="65px" height="67px" viewBox="0 0 65 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <circle id="path-1" cx="28.125" cy="28.125" r="28.125"></circle>
+        <filter x="-22.2%" y="-13.3%" width="144.4%" height="153.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="7.5" operator="erode" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="10" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.325490196   0 0 0 0 0.51372549   0 0 0 0 0.729411765  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <path d="M15.1666737,12.8333333 L22.9116667,12.8333333 C23.4667128,12.8333333 23.9166667,13.2832872 23.9166667,13.8383333 L23.9166667,14.1616667 C23.9166667,14.7167128 23.4667128,15.1666667 22.9116667,15.1666667 L15.1666737,15.1666667 L15.1666737,22.9117681 C15.1666737,23.4668143 14.7167199,23.9167681 14.1616737,23.9167681 L13.8383333,23.9167681 C13.2832872,23.9167681 12.8333333,23.4668143 12.8333333,22.9117681 L12.8333333,15.1666667 L5.08833333,15.1666667 C4.53328716,15.1666667 4.08333333,14.7167128 4.08333333,14.1616667 L4.08333333,13.8383333 C4.08333333,13.2832872 4.53328716,12.8333333 5.08833333,12.8333333 L12.8333333,12.8333333 L12.8333333,5.08833333 C12.8333333,4.53328716 13.2832872,4.08333333 13.8383333,4.08333333 L14.1616737,4.08333333 C14.7167199,4.08333333 15.1666737,4.53328716 15.1666737,5.08833333 L15.1666737,12.8333333 Z" id="path-3"></path>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Главный.-Пустой." transform="translate(-155.000000, -600.000000)">
+            <g id="Tab-Bar-@Panels.Footers" transform="translate(0.000000, 600.000000)">
+                <g id="Tab" transform="translate(150.000000, 0.000000)">
+                    <g id="Group" transform="translate(9.000000, 0.000000)">
+                        <g id="Oval">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#5383BA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <g id="Icons-24/add_24" transform="translate(14.000000, 14.000000)">
+                            <g id="add_24">
+                                <rect id="Bounds" opacity="0.100000001" x="0" y="0" width="28" height="28"></rect>
+                                <mask id="mask-4" fill="white">
+                                    <use xlink:href="#path-3"></use>
+                                </mask>
+                                <use id="Icon" fill="#FFFFFF" fill-rule="nonzero" xlink:href="#path-3"></use>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

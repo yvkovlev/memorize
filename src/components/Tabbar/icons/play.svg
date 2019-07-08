@@ -1,0 +1,28 @@
+<svg width="65px" height="67px" viewBox="0 0 65 67" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <circle id="path-1" cx="28.125" cy="28.125" r="28.125"></circle>
+        <filter x="-22.2%" y="-13.3%" width="144.4%" height="153.3%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="7.5" operator="erode" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="10" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="10" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0.325490196   0 0 0 0 0.51372549   0 0 0 0 0.729411765  0 0 0 1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Сет." transform="translate(-155.000000, -600.000000)">
+            <g id="Tab-Bar-@Panels.Footers" transform="translate(0.000000, 600.000000)">
+                <g id="Tab" transform="translate(150.000000, 0.000000)">
+                    <g id="Group" transform="translate(9.000000, 0.000000)">
+                        <g id="Oval">
+                            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                            <use fill="#5383BA" fill-rule="evenodd" xlink:href="#path-1"></use>
+                        </g>
+                        <g id="play-button" transform="translate(21.000000, 17.000000)" fill="#FFFFFF" fill-rule="nonzero">
+                            <path d="M16.2737143,10.568381 L1.0832381,0.0921904762 C0.922428571,-0.0183333333 0.713952381,-0.0298571429 0.542142857,0.0597142857 C0.369809524,0.150333333 0.261904762,0.328428571 0.261904762,0.523285714 L0.261904762,21.4756667 C0.261904762,21.6705238 0.369809524,21.8491429 0.542142857,21.9397619 C0.618619048,21.9795714 0.702428571,21.9994762 0.785714286,21.9994762 C0.889952381,21.9994762 0.993666667,21.9680476 1.0832381,21.9067619 L16.2737143,11.4305714 C16.4156667,11.332619 16.5,11.1718095 16.5,10.9994762 C16.5,10.8271429 16.4151429,10.6663333 16.2737143,10.568381 Z" id="Path"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
