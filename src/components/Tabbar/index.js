@@ -1,1 +1,1 @@
-export { default } from './Tabbar';
+export { default } from 'components/Tabbar/Tabbar.container';

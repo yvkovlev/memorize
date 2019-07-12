@@ -9,5 +9,12 @@
     "import",
     "react",
     "jsx-a11y"
-  ]
+  ],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
+    }
+  }
 }

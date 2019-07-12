@@ -5,3 +5,7 @@
 .Tabbar__icon {
     margin-bottom: 10px;
 }
+
+.Tabbar_hidden {
+    display: none;
+}

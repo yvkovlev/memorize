@@ -10,43 +10,38 @@ import { ReactComponent as PlayIcon } from './icons/play.svg';
 
 import './Tabbar.css';
 
-const AppTabbar = ({ activeStory, onClick, middleIcon }) => {
-  const switchStory = story => onClick(story);
+const icons = new Map([
+  ['add', AddIcon],
+  ['approve', ApproveIcon],
+  ['play', PlayIcon],
+]);
 
-  let ActualIcon;
-  switch (middleIcon) {
-    case 'add':
-      ActualIcon = AddIcon;
-      break;
-    case 'approve':
-      ActualIcon = ApproveIcon;
-      break;
-    case 'play':
-      ActualIcon = PlayIcon;
-      break;
-    default:
-      break;
+const AppTabbar = ({ icon, selected, hidden, onClick }) => {
+  const IconComponent = icons.get(icon);
+
+  if (hidden) {
+    return null;
   }
 
   return (
     <Tabbar shadow={false} className="Tabbar">
       <TabbarItem
-        onClick={switchStory('sets')}
-        selected={activeStory === 'sets'}
+        onClick={onClick('sets')}
+        selected={selected === 'sets'}
       >
         <Icon28Menu />
       </TabbarItem>
       <TabbarItem
-        onClick={switchStory('control')}
-        selected={activeStory === 'control'}
+        onClick={onClick('control')}
+        selected={selected === 'control'}
       >
         <div className="Tabbar__icon">
-          <ActualIcon />
+          <IconComponent />
         </div>
       </TabbarItem>
       <TabbarItem
-        onClick={switchStory('profile')}
-        selected={activeStory === 'profile'}
+        onClick={onClick('profile')}
+        selected={selected === 'profile'}
       >
         <Icon28User />
       </TabbarItem>
@@ -55,9 +50,14 @@ const AppTabbar = ({ activeStory, onClick, middleIcon }) => {
 };
 
 AppTabbar.propTypes = {
-  activeStory: PropTypes.string.isRequired,
+  icon: PropTypes.oneOf(['add', 'approve', 'play']),
+  selected: PropTypes.oneOf(['sets', 'control', 'profile']).isRequired,
+  hidden: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
-  middleIcon: PropTypes.oneOf(['add', 'approve', 'play']).isRequired,
+};
+
+AppTabbar.defaultProps = {
+  icon: undefined,
 };
 
 export default AppTabbar;

@@ -9,26 +9,23 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Home from './panels/Home/index';
 
 // TODO: обрабатывать activePanel
-const App = ({ layout: { activeStory, activePanel }, setActiveLayout }) => {
-  const switchLayout = layout => () => setActiveLayout(layout);
+const App = ({ layout, setActiveLayout }) => {
+  const { activeStory, activePanel } = layout;
+
   return (
     <Epic
       activeStory={activeStory}
       tabbar={(
-        <Tabbar
-          activeStory={activeStory}
-          middleIcon="play"
-          onClick={switchLayout}
-        />
+        <Tabbar />
       )}
     >
       <View id="sets" activePanel="home">
         <Home id="home" go={() => {}} />
       </View>
-      <View id="control" activePanel="viewSet">
-        <Home id="viewSet" go={() => {}} />
+      <View id="control" activePanel={activePanel}>
         <Home id="editSet" go={() => {}} />
-        <Home id="learnSet" go={() => {}} />
+        <Home id="viewSet" go={() => {}} />
+        <Home id="studySet" go={() => {}} />
       </View>
       <View id="profile" activePanel="profile">
         <Home id="profile" go={() => {}} />
@@ -50,10 +47,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  setActiveLayout: (activeStory, activePanel = undefined) => dispatch(setActiveLayoutAction({
-    activeStory,
-    activePanel,
-  })),
+  setActiveLayout: layout => dispatch(setActiveLayoutAction(layout)),
 });
 
 export default connect(
