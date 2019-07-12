@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Epic, View } from '@vkontakte/vkui';
 import Tabbar from './components/Tabbar';
-import { setActiveLayout as setActiveLayoutAction } from './redux/layout';
 import '@vkontakte/vkui/dist/vkui.css';
 
 import Home from './panels/Home/index';
 
 // TODO: обрабатывать activePanel
-const App = ({ layout, setActiveLayout }) => {
+const App = ({ layout }) => {
   const { activeStory, activePanel } = layout;
 
   return (
@@ -39,18 +38,12 @@ App.propTypes = {
     activeStory: PropTypes.string.isRequired,
     activePanel: PropTypes.string,
   }).isRequired,
-  setActiveLayout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
   layout: state.layout,
 });
 
-const mapDispatchToProps = dispatch => ({
-  setActiveLayout: layout => dispatch(setActiveLayoutAction(layout)),
-});
-
 export default connect(
   mapStateToProps,
-  mapDispatchToProps,
 )(App);
