@@ -2,14 +2,12 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-// reducers
 import layout from 'redux/layout';
-
-// sagas
-import { requestSetsSaga } from 'redux/sets';
+import sets, { requestSetsSaga } from 'redux/sets';
 
 const reducer = combineReducers({
   layout,
+  sets,
 });
 
 const sagaMiddleware = createSagaMiddleware();

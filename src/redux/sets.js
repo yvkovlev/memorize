@@ -1,14 +1,23 @@
 import { createAction, handleActions } from 'redux-actions';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, call, takeEvery } from 'redux-saga/effects';
 
 const defaultState = {
   isRequesting: false,
-  sets: [],
+  list: [],
 };
 
 const mockSets = [
   { title: 'Phrasal verbs', cards: [] },
 ];
+
+const mockRequestSets = () => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(mockSets);
+    }, 500);
+  });
+};
+
 
 // Actions
 
@@ -26,7 +35,7 @@ export function* requestSetsSaga() {
   yield takeEvery(REQUEST_SETS, function* () {
     yield put(requestSetsStarted());
     try {
-      const sets = [...mockSets]; // fetching
+      const sets = yield call(mockRequestSets);
       yield put(requestSetsSuccess(sets));
     } catch (err) {
       yield put(requestSetsFailure(err));
@@ -46,7 +55,7 @@ const reducer = handleActions(
 
     [REQUEST_SETS_SUCCESS]: (state, { sets }) => ({
       isRequesting: false,
-      sets,
+      list: sets,
     }),
 
     // TODO: проработать
