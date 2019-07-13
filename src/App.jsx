@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Epic, View } from '@vkontakte/vkui';
-import Tabbar from './components/Tabbar';
+
 import '@vkontakte/vkui/dist/vkui.css';
 
-import Home from './panels/Home/index';
-import Sets from './panels/Sets';
+import Home from 'panels/Home/index';
+import Sets from 'panels/Sets';
+import Tabbar from 'components/Tabbar';
 
 // TODO: обрабатывать activePanel
 const App = ({ layout }) => {

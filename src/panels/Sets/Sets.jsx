@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import {
   Panel,
   PanelHeader,
-} from '@vkontakte/vkui/src';
+} from '@vkontakte/vkui';
 
 import { requestSets as requestSetsAction } from 'redux/sets';
 
