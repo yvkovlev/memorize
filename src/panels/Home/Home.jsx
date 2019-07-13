@@ -5,7 +5,7 @@ import {
   List,
   PanelHeader,
 } from '@vkontakte/vkui';
-import ListItem from '../../components/SetsListItem';
+import ListItem from 'components/SetsListItem';
 
 const Home = ({ id, go }) => (
   <Panel id={id} theme="white">
