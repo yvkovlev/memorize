@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import SetsListItem from 'components/SetsListItem';
 
-const SetsList = ({ sets }) => {
+const SetsList = ({ sets, onClick }) => {
   return (
     <div className="SetsList">
       { sets.map(set => (
@@ -11,6 +11,8 @@ const SetsList = ({ sets }) => {
           key={set.id}
           title={set.title}
           photo={set.photo}
+          cardsCount={set.cards.length}
+          onClick={onClick(set.id)}
         />
       )) }
     </div>
@@ -19,6 +21,7 @@ const SetsList = ({ sets }) => {
 
 SetsList.propTypes = {
   sets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onClick: PropTypes.func.isRequired,
 };
 
 export default SetsList;

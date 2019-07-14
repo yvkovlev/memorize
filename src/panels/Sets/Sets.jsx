@@ -8,13 +8,23 @@ import {
 } from '@vkontakte/vkui';
 
 import SetsList from 'components/SetsList';
-import { requestSets as requestSetsAction } from 'redux/sets';
+import {
+  requestSets as requestSetsAction,
+  setActiveSet as setActiveSetAction,
+} from 'redux/sets';
 
 class Sets extends React.Component {
   componentDidMount() {
     const { requestSets } = this.props;
     requestSets();
   }
+
+  handleSetClick = (setId) => {
+    const { setActiveSet } = this.props;
+    return () => {
+      setActiveSet(setId);
+    };
+  };
 
   renderLoading() {
     const { isRequesting } = this.props;
@@ -57,6 +67,7 @@ class Sets extends React.Component {
         <span className="Sets__headline headline">Твои сеты</span>
         <SetsList
           sets={sets}
+          onClick={this.handleSetClick}
         />
       </div>
     );
@@ -82,6 +93,7 @@ Sets.propTypes = {
   sets: PropTypes.arrayOf(PropTypes.object).isRequired,
   isRequesting: PropTypes.bool.isRequired,
   requestSets: PropTypes.func.isRequired,
+  setActiveSet: PropTypes.func.isRequired,
   id: PropTypes.string.isRequired,
 };
 
@@ -92,6 +104,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   requestSets: () => dispatch(requestSetsAction()),
+  setActiveSet: setId => dispatch(setActiveSetAction(setId)),
 });
 
 export default connect(

@@ -17,7 +17,7 @@
     justify-content: space-between;
     box-sizing: border-box;
     margin-left: 12px;
-    border-bottom: 1px solid #C4C4C4;
+    border-bottom: 0.5px solid #d7d8d9;
 }
 
 .SetsListItem:last-child .SetsListItem__body {
@@ -29,7 +29,12 @@
     flex-direction: column;
 }
 
+.SetsListItem__title {
+    max-height: 40px;
+    overflow: hidden;
+}
+
 .SetsListItem__actions {
     margin-right: 16px;
-    color: #AAAEB3;
+    color: #528bcc;
 }
