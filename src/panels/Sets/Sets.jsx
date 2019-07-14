@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import {
   Panel,
   PanelHeader,
+  Spinner,
 } from '@vkontakte/vkui';
 
+import SetsList from 'components/SetsList';
 import { requestSets as requestSetsAction } from 'redux/sets';
 
 class Sets extends React.Component {
@@ -14,13 +16,62 @@ class Sets extends React.Component {
     requestSets();
   }
 
-  render() {
-    const { sets, isRequesting, id } = this.props;
-    console.log(sets, isRequesting);
+  renderLoading() {
+    const { isRequesting } = this.props;
 
+    if (!isRequesting) {
+      return null;
+    }
+
+    return (
+      <div className="Sets_centered">
+        <Spinner size="medium" />
+      </div>
+    );
+  }
+
+  renderEmptySets() {
+    const { sets, isRequesting } = this.props;
+
+    if (isRequesting || sets.length !== 0) {
+      return null;
+    }
+
+    return (
+      <div className="Sets_centered">
+        <h3 className="Sets__title title-l">Кажется, сетов еще нет</h3>
+        <span className="subhead subhead_secondary">Но их можно легко добавить нажав на плюсик ниже :)</span>
+      </div>
+    );
+  }
+
+  renderSets() {
+    const { sets, isRequesting } = this.props;
+
+    if (isRequesting || sets.length === 0) {
+      return null;
+    }
+
+    return (
+      <div>
+        <span className="Sets__headline headline">Твои сеты</span>
+        <SetsList
+          sets={sets}
+        />
+      </div>
+    );
+  }
+
+  render() {
+    const { id } = this.props;
     return (
       <Panel id={id} theme="white">
         <PanelHeader>Memorize</PanelHeader>
+        <div className="Sets">
+          { this.renderLoading() }
+          { this.renderEmptySets() }
+          { this.renderSets() }
+        </div>
       </Panel>
     );
   }

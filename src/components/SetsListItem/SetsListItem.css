@@ -1,0 +1,35 @@
+.SetsListItem {
+    display: flex;
+    padding-left: 12px;
+}
+
+.SetsListItem__cover {
+    border-radius: 6px;
+    padding: 4px 0;
+}
+
+.SetsListItem__body {
+    align-self: stretch;
+    flex-grow: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    margin-left: 12px;
+    border-bottom: 1px solid #C4C4C4;
+}
+
+.SetsListItem:last-child .SetsListItem__body {
+    border-bottom: none;
+}
+
+.SetsListItem__meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.SetsListItem__actions {
+    margin-right: 16px;
+    color: #AAAEB3;
+}

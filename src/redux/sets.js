@@ -7,16 +7,16 @@ const defaultState = {
 };
 
 const mockSets = [
-  { title: 'Phrasal verbs', cards: [] },
+  { id: 1, title: 'Phrasal verbs', cards: [] },
+  { id: 2, title: 'Phrasal verbs v2', cards: [] },
+  { id: 3, title: 'Awesome very loooooooooong title for set', cards: [] },
 ];
 
-const mockRequestSets = () => {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(mockSets);
-    }, 500);
-  });
-};
+const mockRequestSets = () => new Promise((resolve) => {
+  setTimeout(() => {
+    resolve(mockSets);
+  }, 500);
+});
 
 
 // Actions
@@ -53,9 +53,9 @@ const reducer = handleActions(
       isRequesting: true,
     }),
 
-    [REQUEST_SETS_SUCCESS]: (state, { sets }) => ({
+    [REQUEST_SETS_SUCCESS]: (state, { payload }) => ({
       isRequesting: false,
-      list: sets,
+      list: payload,
     }),
 
     // TODO: проработать
