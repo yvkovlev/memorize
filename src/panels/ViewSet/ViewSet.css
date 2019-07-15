@@ -1,0 +1,65 @@
+.ViewSet__headerGroup {
+    margin-top: 0px;
+}
+
+.ViewSet__setInfo {
+    display: flex;
+    padding: 24px 12px 14px;
+}
+
+.ViewSet__meta {
+    flex-grow: 1;
+}
+
+.ViewSet__title {
+    margin: 5px 0;
+}
+
+.ViewSet__cover {
+    align-self: center;
+}
+
+.ViewSet__actions {
+    display: flex;
+    border-top: 0.5px solid rgba(0, 0, 0, 0.12);
+}
+
+.ViewSet__separator {
+    align-self: center;
+    border-right: 0.5px solid rgba(0, 0, 0, 0.12);
+    width: 0.5px;
+    height: 28px;
+}
+
+.ViewSet__horizontalSeparator {
+    box-sizing: border-box;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+    height: 1px;
+    width: 100%;
+    margin-left: 13px;
+}
+
+.ViewSet__actions .CellButton__content {
+    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    font-style: normal;
+}
+
+.ViewSet__actions .CellButton__in {
+    justify-content: center;
+}
+
+.ViewSet__cards {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.ViewSet__card:not(:last-child) {
+    margin-bottom: 14px;
+}
+
+.ViewSet__card .Cell__main {
+    padding: 10px 9px;
+}

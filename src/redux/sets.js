@@ -1,10 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 import { put, call, takeEvery } from 'redux-saga/effects';
+import { createSelector } from 'reselect';
 
 const defaultState = {
   isRequesting: false,
   list: [],
-  activeSet: null,
+  activeSetId: null,
 };
 
 const mockSets = [
@@ -16,9 +17,18 @@ const mockSets = [
 const mockRequestSets = () => new Promise((resolve) => {
   setTimeout(() => {
     resolve(mockSets);
-  }, 500);
+  }, 300);
 });
 
+// Selectors
+
+const getSets = state => state.sets.list;
+const getActiveSetId = state => state.sets.activeSetId;
+
+export const getActiveSet = createSelector(
+  [getSets, getActiveSetId],
+  (sets, activeSetId) => sets.find(set => set.id === activeSetId),
+);
 
 // Actions
 
@@ -57,6 +67,7 @@ const reducer = handleActions(
     }),
 
     [REQUEST_SETS_SUCCESS]: (state, { payload }) => ({
+      ...state,
       isRequesting: false,
       list: payload,
     }),
@@ -67,9 +78,9 @@ const reducer = handleActions(
       isRequesting: false,
     }),
 
-    [SET_ACTIVE_SET]: (state, { activeSetId }) => ({
+    [SET_ACTIVE_SET]: (state, { payload }) => ({
       ...state,
-      activeSet: activeSetId,
+      activeSetId: payload,
     }),
   },
   defaultState,

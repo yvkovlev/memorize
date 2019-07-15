@@ -12,6 +12,9 @@ import {
   requestSets as requestSetsAction,
   setActiveSet as setActiveSetAction,
 } from 'redux/sets';
+import {
+  setActiveLayout as setActiveLayoutAction
+} from 'redux/layout';
 
 class Sets extends React.Component {
   componentDidMount() {
@@ -20,9 +23,13 @@ class Sets extends React.Component {
   }
 
   handleSetClick = (setId) => {
-    const { setActiveSet } = this.props;
+    const { setActiveSet, setActiveLayout } = this.props;
     return () => {
       setActiveSet(setId);
+      setActiveLayout({
+        activeStory: 'control',
+        activePanel: 'viewSet',
+      });
     };
   };
 
@@ -88,13 +95,21 @@ class Sets extends React.Component {
   }
 }
 
+// TODO: заменить описание поля cards на более подробное
+export const setShape = PropTypes.shape({
+  id: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  cards: PropTypes.array.isRequired,
+  photo: PropTypes.string,
+});
+
 Sets.propTypes = {
-  // TODO: заменит PropTypes.object на более конкретное описание
-  sets: PropTypes.arrayOf(PropTypes.object).isRequired,
+  id: PropTypes.string.isRequired,
   isRequesting: PropTypes.bool.isRequired,
+  sets: PropTypes.arrayOf(setShape).isRequired,
   requestSets: PropTypes.func.isRequired,
   setActiveSet: PropTypes.func.isRequired,
-  id: PropTypes.string.isRequired,
+  setActiveLayout: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -105,6 +120,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   requestSets: () => dispatch(requestSetsAction()),
   setActiveSet: setId => dispatch(setActiveSetAction(setId)),
+  setActiveLayout: layout => dispatch(setActiveLayoutAction(layout)),
 });
 
 export default connect(
