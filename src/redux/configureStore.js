@@ -4,10 +4,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import layout from 'redux/layout';
 import sets, { requestSetsSaga } from 'redux/sets';
+import setForm from 'redux/setForm';
 
 const reducer = combineReducers({
   layout,
   sets,
+  setForm,
 });
 
 const sagaMiddleware = createSagaMiddleware();

@@ -13,8 +13,9 @@ import {
   setActiveSet as setActiveSetAction,
 } from 'redux/sets';
 import {
-  setActiveLayout as setActiveLayoutAction
+  setActiveLayout as setActiveLayoutAction,
 } from 'redux/layout';
+import { setShape } from 'panels/Sets/Sets.shape';
 
 class Sets extends React.Component {
   componentDidMount() {
@@ -94,14 +95,6 @@ class Sets extends React.Component {
     );
   }
 }
-
-// TODO: заменить описание поля cards на более подробное
-export const setShape = PropTypes.shape({
-  id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  cards: PropTypes.array.isRequired,
-  photo: PropTypes.string,
-});
 
 Sets.propTypes = {
   id: PropTypes.string.isRequired,

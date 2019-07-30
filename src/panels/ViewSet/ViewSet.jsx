@@ -11,7 +11,7 @@ import {
   Cell,
 } from '@vkontakte/vkui';
 import { getActiveSet } from 'redux/sets';
-import { setShape } from 'panels/Sets/Sets';
+import { setShape } from 'panels/Sets/Sets.shape';
 import Pluralize from 'utils/pluralize';
 
 import Icon24Write from '@vkontakte/icons/dist/24/write';
@@ -28,6 +28,7 @@ class ViewSet extends React.Component {
       <Panel id={id} theme="gray">
         <PanelHeader>Просмотр сета</PanelHeader>
         <div className="ViewSet">
+
           <Group className="ViewSet__headerGroup">
             <div className="ViewSet__setInfo">
               <div className="ViewSet__meta">
@@ -44,6 +45,7 @@ class ViewSet extends React.Component {
               <CellButton before={<Icon24Cancel />} level="danger">Удалить</CellButton>
             </div>
           </Group>
+
           <div className="ViewSet__cards">
             <Group className="ViewSet__card">
               <List>
@@ -67,8 +69,8 @@ class ViewSet extends React.Component {
                 </Cell>
               </List>
             </Group>
-
           </div>
+
         </div>
       </Panel>
     );

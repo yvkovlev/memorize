@@ -8,6 +8,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Home from 'panels/Home/index';
 import Sets from 'panels/Sets';
 import ViewSet from 'panels/ViewSet';
+import EditSet from 'panels/EditSet';
 import Tabbar from 'components/Tabbar';
 
 // TODO: обрабатывать activePanel
@@ -25,7 +26,7 @@ const App = ({ layout }) => {
         <Sets id="sets" />
       </View>
       <View id="control" activePanel={activePanel}>
-        <Home id="editSet" go={() => {}} />
+        <EditSet id="editSet" />
         <ViewSet id="viewSet" />
         <Home id="studySet" go={() => {}} />
       </View>
