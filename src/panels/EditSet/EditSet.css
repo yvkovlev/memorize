@@ -1,8 +1,8 @@
-.EditSet__headerGroup {
+.EditSet-HeaderGroup {
     margin-top: 0;
 }
 
-.EditSet__headerContent {
+.EditSet-HeaderContent {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -10,51 +10,51 @@
     padding: 24px 0;
 }
 
-.EditSet__headerInput {
+.EditSet-HeaderInput {
     margin-top: 15px;
     text-align: center;
     outline: none;
     border: none;
 }
 
-.EditSet__headerInput::placeholder {
+.EditSet-HeaderInput::placeholder {
     color: #000000;
     opacity: 1;
 }
 
-.EditSet__headerInput:focus::placeholder {
+.EditSet-HeaderInput:focus::placeholder {
     color: transparent;
     /*border-bottom: 1px solid #528BCC;*/
 }
 
-.EditSet__headerInput:-ms-input-placeholder,
-.EditSet__headerInput::-ms-input-placeholder {
+.EditSet-HeaderInput:-ms-input-placeholder,
+.EditSet-HeaderInput::-ms-input-placeholder {
     color: #000000;
 }
 
-.EditSet__subheader {
+.EditSet-Subheader {
     border-top: 0.5px solid rgba(0, 0, 0, 0.12);
     padding: 16px 12px;
 }
 
-.EditSet__subtitle {
+.EditSet-Subtitle {
     text-transform: uppercase;
     font-weight: 600;
 }
 
-.EditSet__tip {
+.EditSet-Tip {
     margin-top: 5px;
 }
 
-.EditSet__button {
+.EditSet-Button {
     margin: 6px 12px 20px;
     border-radius: 15px;
 }
 
-.EditSet__button .Button__content {
+.EditSet-Button .Button__content {
     display: flex;
 }
 
-.EditSet__button .Button__content .Icon {
+.EditSet-Button .Button__content .Icon {
     margin-right: 8px;
 }

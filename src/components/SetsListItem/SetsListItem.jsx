@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { cn } from '@bem-react/classname';
 
 import Pluralize from 'utils/pluralize';
 import Icon16MoreHorizontal from '@vkontakte/icons/dist/16/more_horizontal';
@@ -8,17 +9,21 @@ import defaultCover from './images/default.png';
 
 const pluralizeCard = new Pluralize('карточка', 'карточки', 'карточек');
 
-const SetsListItem = ({ photo, title, cardsCount, onClick }) => (
-  <div className="SetsListItem" onClick={onClick}>
-    <img className="SetsListItem__cover" src={photo} alt="" />
-    <div className="SetsListItem__body">
-      <div className="SetsListItem__meta">
-        <span className="SetsListItem__title headline">{ title }</span>
+const cnSetsListItem = cn('SetsListItem');
+
+const SetsListItem = ({
+  photo, title, cardsCount, onClick,
+}) => (
+  <div className={cnSetsListItem()} onClick={onClick}>
+    <img className={cnSetsListItem('Cover')} src={photo} alt="" />
+    <div className={cnSetsListItem('Body')}>
+      <div className={cnSetsListItem('Meta')}>
+        <span className={cnSetsListItem('Title', ['headline'])}>{ title }</span>
         <span className="caption-m">
           { `${cardsCount} ${pluralizeCard.getNoun(cardsCount)}` }
         </span>
       </div>
-      <div className="SetsListItem__actions">
+      <div className={cnSetsListItem('Actions')}>
         <Icon16MoreHorizontal />
       </div>
     </div>

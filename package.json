@@ -23,6 +23,7 @@
     "redux-devtools-extension": "^2.13.8"
   },
   "dependencies": {
+    "@bem-react/classname": "^1.5.4",
     "@vkontakte/icons": "^1.6.0",
     "@vkontakte/vkui": "^2.23.1",
     "@vkontakte/vkui-connect": "^1.1.3",

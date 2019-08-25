@@ -2,13 +2,21 @@
     margin-top: 14px;
 }
 
-.CardEdit__input {
+.CardEdit-Input {
     outline: none;
     border: none;
     width: 100%;
 }
 
-.CardEdit__input::placeholder {
+.CardEdit-Input::placeholder {
     color: #99a2ad;
     opacity: 1;
+}
+
+.CardEdit-HorizontalSeparator {
+    box-sizing: border-box;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
+    height: 1px;
+    width: 100%;
+    margin-left: 13px;
 }

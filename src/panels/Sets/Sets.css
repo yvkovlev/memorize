@@ -1,12 +1,12 @@
 .Sets {
 }
 
-.Sets__title {
+.Sets-Title {
     white-space: nowrap;
     margin: 5px 0;
 }
 
-.Sets__headline {
+.Sets-Headline {
     display: inline-block;
     margin: 14px 12px;
     font-weight: 600;
@@ -19,6 +19,5 @@
     -moz-transform: translateX(-50%) translateY(-50%);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
-
     text-align: center;
 }

@@ -6,6 +6,7 @@ import {
   PanelHeader,
   Spinner,
 } from '@vkontakte/vkui';
+import { cn } from '@bem-react/classname';
 
 import SetsList from 'components/SetsList';
 import {
@@ -16,6 +17,8 @@ import {
   setActiveLayout as setActiveLayoutAction,
 } from 'redux/layout';
 import { setShape } from 'panels/Sets/Sets.shape';
+
+const cnSets = cn('Sets');
 
 class Sets extends React.Component {
   componentDidMount() {
@@ -42,7 +45,7 @@ class Sets extends React.Component {
     }
 
     return (
-      <div className="Sets_centered">
+      <div className={cnSets('', { centered: true })}>
         <Spinner size="medium" />
       </div>
     );
@@ -56,9 +59,9 @@ class Sets extends React.Component {
     }
 
     return (
-      <div className="Sets_centered">
-        <h3 className="Sets__title title-l">Кажется, сетов еще нет</h3>
-        <span className="subhead subhead_secondary">Но их можно легко добавить нажав на плюсик ниже :)</span>
+      <div className={cnSets('', { centered: true })}>
+        <h3 className={cnSets('Title', ['title-l'])}>Кажется, сетов еще нет</h3>
+        <span className={cnSets('', ['subhead', 'subhead_secondary'])}>Но их можно легко добавить нажав на плюсик ниже :)</span>
       </div>
     );
   }
@@ -71,13 +74,13 @@ class Sets extends React.Component {
     }
 
     return (
-      <div>
-        <span className="Sets__headline headline">Твои сеты</span>
+      <>
+        <span className={cnSets('Headline', ['headline'])}>Твои сеты</span>
         <SetsList
           sets={sets}
           onClick={this.handleSetClick}
         />
-      </div>
+      </>
     );
   }
 
@@ -86,7 +89,7 @@ class Sets extends React.Component {
     return (
       <Panel id={id} theme="white">
         <PanelHeader>Memorize</PanelHeader>
-        <div className="Sets">
+        <div className={cnSets()}>
           { this.renderLoading() }
           { this.renderEmptySets() }
           { this.renderSets() }

@@ -3,12 +3,12 @@
     padding-left: 12px;
 }
 
-.SetsListItem__cover {
+.SetsListItem-Cover {
     border-radius: 6px;
     padding: 4px 0;
 }
 
-.SetsListItem__body {
+.SetsListItem-Body {
     align-self: stretch;
     flex-grow: 1;
 
@@ -20,21 +20,21 @@
     border-bottom: 0.5px solid #d7d8d9;
 }
 
-.SetsListItem:last-child .SetsListItem__body {
+.SetsListItem:last-child .SetsListItem-Body {
     border-bottom: none;
 }
 
-.SetsListItem__meta {
+.SetsListItem-Meta {
     display: flex;
     flex-direction: column;
 }
 
-.SetsListItem__title {
+.SetsListItem-Title {
     max-height: 40px;
     overflow: hidden;
 }
 
-.SetsListItem__actions {
+.SetsListItem-Actions {
     margin-right: 16px;
     color: #528bcc;
 }

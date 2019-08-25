@@ -1,17 +1,28 @@
 import React from 'react';
 import { Cell, Group, List } from '@vkontakte/vkui';
+import { cn } from '@bem-react/classname';
+
+const cnCardEdit = cn('CardEdit');
 
 const CardEdit = () => {
   return (
-    <div className="CardEdit">
+    <div className={cnCardEdit()}>
       <Group>
         <List>
           <Cell>
-            <input type="text" placeholder="Термин" className="CardEdit__input subhead" />
+            <input
+              type="text"
+              placeholder="Термин"
+              className={cnCardEdit('Input', ['subhead'])}
+            />
           </Cell>
-          <div className="ViewSet__horizontalSeparator" />
+          <div className={cnCardEdit('HorizontalSeparator')} />
           <Cell>
-            <input type="text" placeholder="Определение" className="CardEdit__input subhead" />
+            <input
+              type="text"
+              placeholder="Определение"
+              className={cnCardEdit('Input', ['subhead'])}
+            />
           </Cell>
         </List>
       </Group>

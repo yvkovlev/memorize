@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { cn } from '@bem-react/classname';
 
 import {
   Group,
@@ -32,6 +33,8 @@ const useScrollDown = (cardsCount) => {
   }, [cardsCount]);
 };
 
+const cnEditSet = cn('EditSet');
+
 const EditSet = ({ id, setForm }) => {
   const setId = setForm.set.id;
   const editSetState = setId === undefined ? CREATE_SET : UPDATE_SET;
@@ -57,15 +60,19 @@ const EditSet = ({ id, setForm }) => {
   return (
     <Panel id={id}>
       <PanelHeader>Создать сет</PanelHeader>
-      <div className="EditSet">
-        <Group className="EditSet__headerGroup">
-          <div className="EditSet__headerContent">
+      <div className={cnEditSet()}>
+        <Group className={cnEditSet('HeaderGroup')}>
+          <div className={cnEditSet('HeaderContent')}>
             <img src={defaultCover} alt="" />
-            <input type="text" placeholder="Название сета" className="EditSet__headerInput title-xl" />
-            <span className="EditSet__tip caption-s">Кликни для редактирования</span>
+            <input
+              type="text"
+              placeholder="Название сета"
+              className={cnEditSet('HeaderInput', ['title-xl'])}
+            />
+            <span className={cnEditSet('Tip', ['caption-s'])}>Кликни для редактирования</span>
           </div>
-          <div className="EditSet__subheader">
-            <span className="EditSet__subtitle caption-m">Карточки</span>
+          <div className={cnEditSet('Subheader')}>
+            <span className={cnEditSet('Subtitle', ['caption-m'])}>Карточки</span>
           </div>
         </Group>
 
@@ -77,7 +84,7 @@ const EditSet = ({ id, setForm }) => {
         }
 
         <Button
-          className="EditSet__button"
+          className={cnEditSet('Button')}
           level="outline"
           onClick={onAddCard}
         >

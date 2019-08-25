@@ -1,37 +1,37 @@
-.ViewSet__headerGroup {
+.ViewSet-HeaderGroup {
     margin-top: 0px;
 }
 
-.ViewSet__setInfo {
+.ViewSet-SetInfo {
     display: flex;
     padding: 24px 12px 14px;
 }
 
-.ViewSet__meta {
+.ViewSet-Meta {
     flex-grow: 1;
 }
 
-.ViewSet__title {
+.ViewSet-Title {
     margin: 5px 0;
 }
 
-.ViewSet__cover {
+.ViewSet-Cover {
     align-self: center;
 }
 
-.ViewSet__actions {
+.ViewSet-Actions {
     display: flex;
     border-top: 0.5px solid rgba(0, 0, 0, 0.12);
 }
 
-.ViewSet__separator {
+.ViewSet-Separator {
     align-self: center;
     border-right: 0.5px solid rgba(0, 0, 0, 0.12);
     width: 0.5px;
     height: 28px;
 }
 
-.ViewSet__horizontalSeparator {
+.ViewSet-HorizontalSeparator {
     box-sizing: border-box;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.12);
     height: 1px;
@@ -39,27 +39,27 @@
     margin-left: 13px;
 }
 
-.ViewSet__actions .CellButton__content {
+.ViewSet-Actions .CellButton__content {
     text-transform: uppercase;
     font-size: 13px;
     font-weight: 600;
     font-style: normal;
 }
 
-.ViewSet__actions .CellButton__in {
+.ViewSet-Actions .CellButton__in {
     justify-content: center;
 }
 
-.ViewSet__cards {
+.ViewSet-Cards {
     margin-top: 24px;
     display: flex;
     flex-direction: column;
 }
 
-.ViewSet__card:not(:last-child) {
+.ViewSet-Card:not(:last-child) {
     margin-bottom: 14px;
 }
 
-.ViewSet__card .Cell__main {
+.ViewSet-Card .Cell__main {
     padding: 10px 9px;
 }

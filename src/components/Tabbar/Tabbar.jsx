@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Tabbar, TabbarItem } from '@vkontakte/vkui';
+import { cn } from '@bem-react/classname';
 
 import Icon28Menu from '@vkontakte/icons/dist/28/menu';
 import Icon28User from '@vkontakte/icons/dist/28/user';
@@ -16,7 +17,11 @@ const icons = new Map([
   ['play', PlayIcon],
 ]);
 
-const AppTabbar = ({ icon, selected, hidden, onClick }) => {
+const cnTabbar = cn('Tabbar');
+
+const AppTabbar = ({
+  icon, selected, hidden, onClick,
+}) => {
   const IconComponent = icons.get(icon);
 
   if (hidden) {
@@ -24,7 +29,7 @@ const AppTabbar = ({ icon, selected, hidden, onClick }) => {
   }
 
   return (
-    <Tabbar shadow={false} className="Tabbar">
+    <Tabbar shadow={false} className={cnTabbar()}>
       <TabbarItem
         onClick={onClick('sets')}
         selected={selected === 'sets'}
@@ -35,7 +40,7 @@ const AppTabbar = ({ icon, selected, hidden, onClick }) => {
         onClick={onClick('control')}
         selected={selected === 'control'}
       >
-        <div className="Tabbar__icon">
+        <div className={cnTabbar('Icon')}>
           <IconComponent />
         </div>
       </TabbarItem>

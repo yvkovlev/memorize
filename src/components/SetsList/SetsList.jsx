@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { cn } from '@bem-react/classname';
 
 import SetsListItem from 'components/SetsListItem';
 
+const cnSetsList = cn('SetsList');
+
 const SetsList = ({ sets, onClick }) => {
   return (
-    <div className="SetsList">
+    <div className={cnSetsList()}>
       { sets.map(set => (
         <SetsListItem
           key={set.id}
