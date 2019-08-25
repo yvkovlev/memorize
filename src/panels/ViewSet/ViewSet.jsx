@@ -22,63 +22,60 @@ const pluralizeCard = new Pluralize('карточка', 'карточки', 'к�
 
 const cnViewSet = cn('ViewSet');
 
-class ViewSet extends React.Component {
-  render() {
-    const { id, set } = this.props;
-    const cardsCount = set.cards.length;
+const ViewSet = ({ id, set }) => {
+  const cardsCount = set.cards.length;
 
-    return (
-      <Panel id={id} theme="gray">
-        <PanelHeader>Просмотр сета</PanelHeader>
-        <div className={cnViewSet()}>
+  return (
+    <Panel id={id} theme="gray">
+      <PanelHeader>Просмотр сета</PanelHeader>
+      <div className={cnViewSet()}>
 
-          <Group className={cnViewSet('HeaderGroup')}>
-            <div className={cnViewSet('SetInfo')}>
-              <div className={cnViewSet('Meta')}>
+        <Group className={cnViewSet('HeaderGroup')}>
+          <div className={cnViewSet('SetInfo')}>
+            <div className={cnViewSet('Meta')}>
                 <span className="caption-m">
                   { `${cardsCount} ${pluralizeCard.getNoun(cardsCount)}` }
                 </span>
-                <h1 className={cnViewSet('Title', ['title-xxl'])}>{set.title}</h1>
-              </div>
-              <img src="/images/image.png" alt="" className={cnViewSet('Cover')} />
+              <h1 className={cnViewSet('Title', ['title-xxl'])}>{set.title}</h1>
             </div>
-            <div className={cnViewSet('Actions')}>
-              <CellButton before={<Icon24Write />}>Редактировать</CellButton>
-              <div className={cnViewSet('Separator')} />
-              <CellButton before={<Icon24Cancel />} level="danger">Удалить</CellButton>
-            </div>
-          </Group>
-
-          <div className={cnViewSet('Cards')}>
-            <Group className={cnViewSet('Card')}>
-              <List>
-                <Cell>
-                  <span className="subhead">Пятница</span>
-                </Cell>
-                <div className={cnViewSet('HorizontalSeparator')} />
-                <Cell>
-                  <span className="caption-s">Суббота</span>
-                </Cell>
-              </List>
-            </Group>
-            <Group className={cnViewSet('Card')}>
-              <List>
-                <Cell>
-                  <span className="subhead">Пятница</span>
-                </Cell>
-                <div className={cnViewSet('HorizontalSeparator')} />
-                <Cell>
-                  <span className="caption-s">Суббота</span>
-                </Cell>
-              </List>
-            </Group>
+            <img src="/images/image.png" alt="" className={cnViewSet('Cover')} />
           </div>
+          <div className={cnViewSet('Actions')}>
+            <CellButton before={<Icon24Write />}>Редактировать</CellButton>
+            <div className={cnViewSet('Separator')} />
+            <CellButton before={<Icon24Cancel />} level="danger">Удалить</CellButton>
+          </div>
+        </Group>
 
+        <div className={cnViewSet('Cards')}>
+          <Group className={cnViewSet('Card')}>
+            <List>
+              <Cell>
+                <span className="subhead">Пятница</span>
+              </Cell>
+              <div className={cnViewSet('HorizontalSeparator')} />
+              <Cell>
+                <span className="caption-s">Суббота</span>
+              </Cell>
+            </List>
+          </Group>
+          <Group className={cnViewSet('Card')}>
+            <List>
+              <Cell>
+                <span className="subhead">Пятница</span>
+              </Cell>
+              <div className={cnViewSet('HorizontalSeparator')} />
+              <Cell>
+                <span className="caption-s">Суббота</span>
+              </Cell>
+            </List>
+          </Group>
         </div>
-      </Panel>
-    );
-  }
-}
+
+      </div>
+    </Panel>
+  );
+};
 
 ViewSet.propTypes = {
   id: PropTypes.string.isRequired,

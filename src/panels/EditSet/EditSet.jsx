@@ -30,7 +30,7 @@ const useScrollDown = (cardsCount) => {
       });
     }
     setMemoCardsCount(cardsCount);
-  }, [cardsCount]);
+  }, [cardsCount, memoCardsCount]);
 };
 
 const cnEditSet = cn('EditSet');
@@ -48,14 +48,14 @@ const EditSet = ({ id, setForm }) => {
         { ...cardInitialState },
       ],
     }));
-  });
+  }, []);
   useScrollDown(internalSet.cards.length);
 
   React.useEffect(() => {
     if (editSetState === UPDATE_SET) {
       requestSet(setId);
     }
-  }, []);
+  }, [editSetState, setId]);
 
   return (
     <Panel id={id}>

@@ -9,8 +9,13 @@
   "plugins": [
     "import",
     "react",
-    "jsx-a11y"
+    "jsx-a11y",
+    "react-hooks"
   ],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
+  },
   "settings": {
     "import/resolver": {
       "node": {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -20,26 +20,22 @@ import { setShape } from 'panels/Sets/Sets.shape';
 
 const cnSets = cn('Sets');
 
-class Sets extends React.Component {
-  componentDidMount() {
-    const { requestSets } = this.props;
+const Sets = ({
+  id, sets, isRequesting, requestSets, setActiveSet, setActiveLayout,
+}) => {
+  const handleSetClick = useCallback(setId => () => {
+    setActiveSet(setId);
+    setActiveLayout({
+      activeStory: 'control',
+      activePanel: 'viewSet',
+    });
+  }, [setActiveSet, setActiveLayout]);
+
+  useEffect(() => {
     requestSets();
-  }
+  }, [requestSets]);
 
-  handleSetClick = (setId) => {
-    const { setActiveSet, setActiveLayout } = this.props;
-    return () => {
-      setActiveSet(setId);
-      setActiveLayout({
-        activeStory: 'control',
-        activePanel: 'viewSet',
-      });
-    };
-  };
-
-  renderLoading() {
-    const { isRequesting } = this.props;
-
+  const renderLoading = useCallback(() => {
     if (!isRequesting) {
       return null;
     }
@@ -49,11 +45,9 @@ class Sets extends React.Component {
         <Spinner size="medium" />
       </div>
     );
-  }
+  }, [isRequesting]);
 
-  renderEmptySets() {
-    const { sets, isRequesting } = this.props;
-
+  const renderEmptySets = useCallback(() => {
     if (isRequesting || sets.length !== 0) {
       return null;
     }
@@ -64,11 +58,9 @@ class Sets extends React.Component {
         <span className={cnSets('', ['subhead', 'subhead_secondary'])}>Но их можно легко добавить нажав на плюсик ниже :)</span>
       </div>
     );
-  }
+  }, [isRequesting, sets.length]);
 
-  renderSets() {
-    const { sets, isRequesting } = this.props;
-
+  const renderSets = useCallback(() => {
     if (isRequesting || sets.length === 0) {
       return null;
     }
@@ -78,26 +70,23 @@ class Sets extends React.Component {
         <span className={cnSets('Headline', ['headline'])}>Твои сеты</span>
         <SetsList
           sets={sets}
-          onClick={this.handleSetClick}
+          onClick={handleSetClick}
         />
       </>
     );
-  }
+  }, [handleSetClick, isRequesting, sets]);
 
-  render() {
-    const { id } = this.props;
-    return (
-      <Panel id={id} theme="white">
-        <PanelHeader>Memorize</PanelHeader>
-        <div className={cnSets()}>
-          { this.renderLoading() }
-          { this.renderEmptySets() }
-          { this.renderSets() }
-        </div>
-      </Panel>
-    );
-  }
-}
+  return (
+    <Panel id={id} theme="white">
+      <PanelHeader>Memorize</PanelHeader>
+      <div className={cnSets()}>
+        { renderLoading() }
+        { renderEmptySets() }
+        { renderSets() }
+      </div>
+    </Panel>
+  );
+};
 
 Sets.propTypes = {
   id: PropTypes.string.isRequired,
