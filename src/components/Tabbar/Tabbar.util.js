@@ -8,6 +8,6 @@ const roadMap = {
   profile: new Map(),
 };
 
-export function getNextActivePanel(activeStory, activePanel) {
-  return roadMap[activeStory].get(activePanel);
-}
+export const getNextActivePanel = (story, panel) => roadMap[story].get(panel);
+
+export default getNextActivePanel;

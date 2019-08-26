@@ -6,3 +6,5 @@ export const setFormShape = {
   set: PropTypes.shape(setShape).isRequired,
   isRequesting: PropTypes.bool.isRequired,
 };
+
+export default setFormShape;

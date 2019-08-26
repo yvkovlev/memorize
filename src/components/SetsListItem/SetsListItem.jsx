@@ -14,7 +14,13 @@ const cnSetsListItem = cn('SetsListItem');
 const SetsListItem = ({
   photo, title, cardsCount, onClick,
 }) => (
-  <div className={cnSetsListItem()} onClick={onClick}>
+  <div
+    className={cnSetsListItem()}
+    onClick={onClick}
+    onKeyPress={() => {}}
+    role="presentation"
+    tabIndex={undefined}
+  >
     <img className={cnSetsListItem('Cover')} src={photo} alt="" />
     <div className={cnSetsListItem('Body')}>
       <div className={cnSetsListItem('Meta')}>

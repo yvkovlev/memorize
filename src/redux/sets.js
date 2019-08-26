@@ -9,9 +9,15 @@ const defaultState = {
 };
 
 const mockSets = [
-  { id: 1, title: 'IELTS 12.06.19', cards: new Array(2), photo: '/images/image.png' },
-  { id: 2, title: 'IELTS 10.06.19', cards: new Array(15), photo: '/images/image2.png' },
-  { id: 3, title: 'Awesome very loooooooooong title for set', cards: new Array(9) },
+  {
+    id: 1, title: 'IELTS 12.06.19', cards: new Array(2), photo: '/images/image.png',
+  },
+  {
+    id: 2, title: 'IELTS 10.06.19', cards: new Array(15), photo: '/images/image2.png',
+  },
+  {
+    id: 3, title: 'Awesome very loooooooooong title for set', cards: new Array(9),
+  },
 ];
 
 const mockRequestSets = () => new Promise((resolve) => {
@@ -45,7 +51,7 @@ const requestSetsFailure = createAction(REQUEST_SETS_FAILURE);
 export const setActiveSet = createAction(SET_ACTIVE_SET);
 
 export function* requestSetsSaga() {
-  yield takeEvery(REQUEST_SETS, function* () {
+  yield takeEvery(REQUEST_SETS, function* workerSaga() {
     yield put(requestSetsStarted());
     try {
       const sets = yield call(mockRequestSets);

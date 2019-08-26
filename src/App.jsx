@@ -10,6 +10,7 @@ import Sets from 'panels/Sets';
 import ViewSet from 'panels/ViewSet';
 import EditSet from 'panels/EditSet';
 import Tabbar from 'components/Tabbar';
+import { StudySet } from 'panels/StudySet';
 
 // TODO: обрабатывать activePanel
 const App = ({ layout }) => {
@@ -28,7 +29,7 @@ const App = ({ layout }) => {
       <View id="control" activePanel={activePanel}>
         <EditSet id="editSet" />
         <ViewSet id="viewSet" />
-        <Home id="studySet" go={() => {}} />
+        <StudySet id="studySet" />
       </View>
       <View id="profile" activePanel="profile">
         <Home id="profile" go={() => {}} />

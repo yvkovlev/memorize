@@ -33,9 +33,9 @@ const ViewSet = ({ id, set }) => {
         <Group className={cnViewSet('HeaderGroup')}>
           <div className={cnViewSet('SetInfo')}>
             <div className={cnViewSet('Meta')}>
-                <span className="caption-m">
-                  { `${cardsCount} ${pluralizeCard.getNoun(cardsCount)}` }
-                </span>
+              <span className="caption-m">
+                { `${cardsCount} ${pluralizeCard.getNoun(cardsCount)}` }
+              </span>
               <h1 className={cnViewSet('Title', ['title-xxl'])}>{set.title}</h1>
             </div>
             <img src="/images/image.png" alt="" className={cnViewSet('Cover')} />
@@ -71,7 +71,6 @@ const ViewSet = ({ id, set }) => {
             </List>
           </Group>
         </div>
-
       </div>
     </Panel>
   );

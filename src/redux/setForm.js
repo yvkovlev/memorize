@@ -53,10 +53,10 @@ const requestSetFailure = createAction(REQUEST_SET_FAILURE);
 
 export const populateSetForm = createAction(POPULATE_SET_FORM);
 export const saveSetStarted = createAction(SAVE_SET_STARTED);
-const saveSetSuccess = createAction(SAVE_SET_SUCCESS);
+export const saveSetSuccess = createAction(SAVE_SET_SUCCESS);
 
-export const requestSetSaga = function* () {
-  yield takeEvery(REQUEST_SET, function* (action) {
+export function* requestSetSaga() {
+  yield takeEvery(REQUEST_SET, function* workerSaga(action) {
     yield put(requestSetStarted());
     try {
       const set = yield call(mockRequestSet, action.payload.id);
@@ -66,7 +66,7 @@ export const requestSetSaga = function* () {
       throw new Error(err.message);
     }
   });
-};
+}
 
 // Reducer
 
