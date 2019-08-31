@@ -1,3 +1,11 @@
+:root {
+    --cards-free-area: calc(100vh - 44px);
+    --cards-height: calc(var(--cards-free-area) * 0.8);
+    --cards-vertical-margin: calc(var(--cards-free-area) * 0.03);
+    --cards-shift: calc(var(--cards-free-area) * 0.07);
+    --card-number: 0; 
+}
+
 .title-xxl {
     font-size: 24px;
     line-height: 28px;

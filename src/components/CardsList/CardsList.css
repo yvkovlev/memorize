@@ -1,3 +1,13 @@
 .CardsList {
+	position: relative;
+  height: var(--cards-free-area);
+  overflow: hidden;
+}
+
+.CardsList-Wrapper {
+	transform: translateY(calc((-1) * var(--cards-height) * var(--card-number) + (-1) * var(--cards-vertical-margin) * var(--card-number) + var(--cards-shift) * var(--card-number) / var(--card-number)));
+	transition: all 0.2s ease-in-out;
+	position: relative;
 	padding: 0 12px;
+	overflow: hidden;
 }
