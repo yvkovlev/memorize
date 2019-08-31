@@ -13,7 +13,7 @@
     transform-style: preserve-3d;
 }
 
-.CardsListItem.flipped .CardsListItem-Flipper {
+.CardsListItem.CardsListItem_isFlipped .CardsListItem-Flipper {
     transform: rotateY(180deg);
 }
 

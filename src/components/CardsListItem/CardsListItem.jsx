@@ -11,12 +11,19 @@ const cnCardsListItem = cn('CardsListItem');
 const CardsListItem = ({ content, type }) => {
   const [isFlipped, setIsFlipped] = React.useState(false);
 
+  const onTouchEnd = React.useCallback(
+    () => {
+      if (type === 'middle') {
+        setIsFlipped(prevValue => !prevValue);
+      }
+    },
+    [type],
+  );
+
   return (
     <div
-      className={cnCardsListItem(this, [(isFlipped) ? 'flipped' : null])}
-      onTouchEnd={() => {
-        if (type === 'middle') setIsFlipped(!isFlipped);
-      }}
+      className={cnCardsListItem('', { isFlipped })}
+      onTouchEnd={() => onTouchEnd()}
       role="presentation"
       tabIndex={undefined}
     >
@@ -30,8 +37,7 @@ const CardsListItem = ({ content, type }) => {
           <div
             className={cnCardsListItem('Context')}
           >
-            { type === 'first'
-              && (
+            { type === 'first' && (
               <div className={cnCardsListItem('ContextImageWrapper')}>
                 <img
                   className={cnCardsListItem('ContextImage')}
@@ -39,19 +45,16 @@ const CardsListItem = ({ content, type }) => {
                   alt="Свайпните вверх"
                 />
               </div>
-              )
-            }
-            { type !== 'last'
-              && (
+            )}
+            { type !== 'last' && (
               <div className={cnCardsListItem('ContextText', ['caption-s'])}>
                 {
-                  (type === 'first')
+                  type === 'first'
                     ? 'Для начала обучения пролистни вверх'
                     : 'Клик по карточке, чтобы увидеть перевод'
                 }
               </div>
-              )
-            }
+            )}
           </div>
         </div>
         <div className={cnCardsListItem('Back')}>

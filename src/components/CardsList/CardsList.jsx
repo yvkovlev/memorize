@@ -35,14 +35,14 @@ const CardsList = ({ cards }) => (
         type="first"
       />
       {
-            cards.map(card => (
-              <CardsListItem
-                key={card.id}
-                content={card.content}
-                type="middle"
-              />
-            ))
-          }
+        cards.map(card => (
+          <CardsListItem
+            key={card.id}
+            content={card.content}
+            type="middle"
+          />
+        ))
+      }
       <CardsListItem
         content={staticCards[staticCards.length - 1].content}
         type="last"
