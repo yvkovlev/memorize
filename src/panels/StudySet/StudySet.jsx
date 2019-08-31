@@ -5,6 +5,7 @@ import {
   PanelHeader,
 } from '@vkontakte/vkui';
 import { cn } from '@bem-react/classname';
+import { PANEL_HEADER } from 'panels/common';
 
 import CardsList from 'components/CardsList';
 
@@ -44,7 +45,7 @@ const cards = [
 
 export const StudySet = ({ id, className }) => (
   <Panel id={id} className={className}>
-    <PanelHeader>Memorize</PanelHeader>
+    <PanelHeader>{ PANEL_HEADER }</PanelHeader>
     <div className={cnStudySet()}>
       <CardsList
         cards={cards}

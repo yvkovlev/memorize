@@ -16,3 +16,11 @@ build
 
 .vscode
 .idea
+
+# Environment variables
+.env
+
+# Firebase related
+.firebase
+.runtimeconfig.json
+functions/service-account.json

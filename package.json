@@ -5,9 +5,12 @@
   "main": "index.js",
   "scripts": {
     "start": "cross-env PORT=10888 react-scripts start",
-    "build": "react-scripts build",
     "lint": "npx eslint './src/**/*.{js,jsx}'",
-    "lint:fix": "npx eslint './src/**/*.{js,jsx}' --fix"
+    "lint:fix": "npx eslint './src/**/*.{js,jsx}' --fix",
+    "build": "react-scripts build",
+    "build:test": "REACT_APP_BUILD_TYPE=test react-scripts build",
+    "publish:prod": "firebase deploy --only hosting:vk-app-memorize",
+    "publish:test": "firebase deploy --only hosting:test-vk-app-memorize"
   },
   "keywords": [],
   "author": "",

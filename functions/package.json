@@ -1,0 +1,19 @@
+{
+  "name": "memorize-authentication",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "firebase serve --only functions --port=9000"
+  },
+  "author": "Denis Tereschenko",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase-admin": "^8.4.0",
+    "firebase-functions": "^3.2.0"
+  },
+  "engines": {
+    "node": "10"
+  }
+}
