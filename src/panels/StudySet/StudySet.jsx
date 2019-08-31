@@ -19,7 +19,7 @@ const cards = [
       photoURL: '',
       title: 'Spoon',
       subtitle: '',
-      'definition': 'Ложка',
+      definition: 'Ложка',
     },
   },
   {
@@ -28,7 +28,7 @@ const cards = [
       photoURL: '',
       title: 'Fork',
       subtitle: '',
-      'definition': 'Вилка',
+      definition: 'Вилка',
     },
   },
   {
@@ -37,7 +37,7 @@ const cards = [
       photoURL: '',
       title: 'Plate',
       subtitle: '',
-      'definition': 'Тарелка',
+      definition: 'Тарелка',
     },
   },
 ];

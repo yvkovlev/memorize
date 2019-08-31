@@ -2,19 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 
+import { cardsListItemShape } from './CardsListItem.shape';
+
 import swipeUp from './images/swipe-up.svg';
 
 const cnCardsListItem = cn('CardsListItem');
 
-
-const CardsListItem = ({ content, type,}) => {
-
-  const [ isFlipped, setIsFlipped ] = React.useState(false);
+const CardsListItem = ({ content, type }) => {
+  const [isFlipped, setIsFlipped] = React.useState(false);
 
   return (
     <div
       className={cnCardsListItem(this, [(isFlipped) ? 'flipped' : null])}
-      onTouchEnd={() => setIsFlipped(!isFlipped)}
+      onTouchEnd={() => {
+        if (type === 'middle') setIsFlipped(!isFlipped);
+      }}
       role="presentation"
       tabIndex={undefined}
     >
@@ -72,11 +74,11 @@ const CardsListItem = ({ content, type,}) => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 CardsListItem.propTypes = {
-  content: PropTypes.object.isRequired,
+  content: PropTypes.shape(cardsListItemShape).isRequired,
   type: PropTypes.string.isRequired,
 };
 

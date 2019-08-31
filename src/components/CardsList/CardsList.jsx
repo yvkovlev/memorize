@@ -14,7 +14,7 @@ const staticCards = [
       photoURL: defaultCover,
       title: 'Kitchen',
       subtitle: '2 карточки',
-      'definition': '',
+      definition: '',
     },
   },
   {
@@ -22,32 +22,20 @@ const staticCards = [
       photoURL: doneCover,
       title: 'Отлично! Вы закончили сет.',
       subtitle: 'Вы можете начать заново или перейти к другим сетам',
-      'definition': '',
+      definition: '',
     },
   },
 ];
 
-const CardsList = ({ cards }) => {
-
-  const [ cardNumber, setCardNumber ] = React.useState(0);
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setCardNumber(cardNumber + 1);
-    }, 300000)
-    return () => {
-      clearTimeout(timer);
-    }
-  }, [cardNumber])
-
-  return (
-    <div className={cnCardsList()}>
-      <div className={cnCardsList('Wrapper')} style={{'--card-number': 2}}>
-        <CardsListItem
-          content={staticCards[0].content}
-          type="first"
-        />
-        {
-            cards.map((card, i) => (
+const CardsList = ({ cards }) => (
+  <div className={cnCardsList()}>
+    <div className={cnCardsList('Wrapper')} style={{ '--card-number': 2 }}>
+      <CardsListItem
+        content={staticCards[0].content}
+        type="first"
+      />
+      {
+            cards.map(card => (
               <CardsListItem
                 key={card.id}
                 content={card.content}
@@ -55,14 +43,13 @@ const CardsList = ({ cards }) => {
               />
             ))
           }
-        <CardsListItem
-          content={staticCards[staticCards.length - 1].content}
-          type="last"
-        />
-      </div>
+      <CardsListItem
+        content={staticCards[staticCards.length - 1].content}
+        type="last"
+      />
     </div>
-  )
-}
+  </div>
+);
 
 CardsList.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.object).isRequired,
