@@ -66,13 +66,11 @@ const CardsListItem = ({ content, type }) => {
           <div
             className={cnCardsListItem('Context')}
           >
-            { type !== 'last'
-              && (
+            { type !== 'last' && (
               <div className={cnCardsListItem('ContextText', ['caption-s'])}>
                 Клик по карточке, чтобы увидеть термин
               </div>
-              )
-            }
+            )}
           </div>
         </div>
       </div>
