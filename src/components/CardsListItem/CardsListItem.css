@@ -45,7 +45,7 @@
     align-items: center;
     padding: 0 35px;
     text-align: center;
-    transform: translateY(-34px);
+    transform: translateY(-50%);
 }
 
 .CardsListItem-PhotoWrapper {

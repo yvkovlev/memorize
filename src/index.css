@@ -1,9 +1,5 @@
 :root {
     --free-area: calc(100vh - 44px);
-    --cards-height: calc(var(--free-area) * 0.8);
-    --cards-vertical-margin: calc(var(--free-area) * 0.03);
-    --cards-shift: calc(var(--free-area) * 0.07);
-    --card-number: 0;
 }
 
 .title-xxl {

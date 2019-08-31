@@ -23,7 +23,7 @@ const CardsListItem = ({ content, type }) => {
   return (
     <div
       className={cnCardsListItem('', { isFlipped })}
-      onTouchEnd={() => onTouchEnd()}
+      onTouchEnd={onTouchEnd}
       role="presentation"
       tabIndex={undefined}
     >

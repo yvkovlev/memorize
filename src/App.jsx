@@ -11,6 +11,9 @@ import ViewSet from 'panels/ViewSet';
 import EditSet from 'panels/EditSet';
 import Tabbar from 'components/Tabbar';
 import { StudySet } from 'panels/StudySet';
+import { cn } from '@bem-react/classname';
+
+const cnApp = cn('App');
 
 // TODO: обрабатывать activePanel
 const App = ({ layout }) => {
@@ -29,7 +32,7 @@ const App = ({ layout }) => {
       <View id="control" activePanel={activePanel}>
         <EditSet id="editSet" />
         <ViewSet id="viewSet" />
-        <StudySet id="studySet" />
+        <StudySet id="studySet" className={cnApp('StudySet')} />
       </View>
       <View id="profile" activePanel="profile">
         <Home id="profile" go={() => {}} />

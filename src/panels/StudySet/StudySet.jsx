@@ -42,8 +42,8 @@ const cards = [
   },
 ];
 
-export const StudySet = ({ id }) => (
-  <Panel id={id} className={cnStudySet('Panel')}>
+export const StudySet = ({ id, className }) => (
+  <Panel id={id} className={className}>
     <PanelHeader>Memorize</PanelHeader>
     <div className={cnStudySet()}>
       <CardsList
@@ -55,6 +55,7 @@ export const StudySet = ({ id }) => (
 
 StudySet.propTypes = {
   id: PropTypes.string.isRequired,
+  className: PropTypes.string.isRequired,
 };
 
 export default StudySet;
