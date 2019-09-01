@@ -17,6 +17,7 @@ import {
   setActiveLayout as setActiveLayoutAction,
 } from 'redux/layout';
 import { setShape } from 'panels/Sets/Sets.shape';
+import { PANEL_HEADER } from 'panels/common';
 
 const cnSets = cn('Sets');
 
@@ -78,7 +79,7 @@ const Sets = ({
 
   return (
     <Panel id={id} theme="white">
-      <PanelHeader>Memorize</PanelHeader>
+      <PanelHeader>{ PANEL_HEADER }</PanelHeader>
       <div className={cnSets()}>
         { renderLoading() }
         { renderEmptySets() }
