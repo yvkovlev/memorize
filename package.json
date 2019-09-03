@@ -8,9 +8,8 @@
     "lint": "npx eslint './src/**/*.{js,jsx}'",
     "lint:fix": "npx eslint './src/**/*.{js,jsx}' --fix",
     "build": "react-scripts build",
-    "build:test": "REACT_APP_BUILD_TYPE=test react-scripts build",
-    "publish:prod": "firebase deploy --only hosting:vk-app-memorize",
-    "publish:test": "firebase deploy --only hosting:test-vk-app-memorize"
+    "publish:prod": "react-scripts build && firebase deploy --only hosting:vk-app-memorize",
+    "publish:test": "REACT_APP_BUILD_TYPE=test react-scripts build && firebase deploy --only hosting:test-vk-app-memorize"
   },
   "keywords": [],
   "author": "",

@@ -27,29 +27,35 @@ const staticCards = [
   },
 ];
 
-const CardsList = ({ cards }) => (
-  <div className={cnCardsList()}>
-    <div className={cnCardsList('Wrapper')} style={{ '--card-number': 2 }}>
-      <CardsListItem
-        content={staticCards[0].content}
-        type="first"
-      />
-      {
-        cards.map(card => (
-          <CardsListItem
-            key={card.id}
-            content={card.content}
-            type="middle"
-          />
-        ))
-      }
-      <CardsListItem
-        content={staticCards[staticCards.length - 1].content}
-        type="last"
-      />
+const CardsList = (props) => {
+  const { cards } = props;
+  const [cardNumber] = React.useState(2);
+
+  return (
+    <div className={cnCardsList()}>
+      <div className={cnCardsList('Wrapper')} style={{ '--card-number': cardNumber }}>
+        <CardsListItem
+          content={staticCards[0].content}
+          type="first"
+        />
+        {
+          cards.map((card, i) => (
+            <CardsListItem
+              key={card.id}
+              content={card.content}
+              type="middle"
+              isFlippable={i === cardNumber - 1}
+            />
+          ))
+        }
+        <CardsListItem
+          content={staticCards[staticCards.length - 1].content}
+          type="last"
+        />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 CardsList.propTypes = {
   cards: PropTypes.arrayOf(PropTypes.object).isRequired,

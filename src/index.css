@@ -1,5 +1,14 @@
 :root {
-    --free-area: calc(100vh - 44px);
+    --panel-header: 44px;
+    --free-area: calc(100vh - var(--panel-header));
+}
+
+.Epic--ios {
+    --panel-header: var(--panelheader_height_ios);
+}
+
+.Epic--android {
+    --panel-header: var(--panelheader_height_android);
 }
 
 .title-xxl {

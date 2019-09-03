@@ -3,16 +3,21 @@ import PropTypes from 'prop-types';
 import {
   Panel,
   PanelHeader,
+  HeaderButton,
+  platform,
+  IOS,
 } from '@vkontakte/vkui';
+import Icon24Back from '@vkontakte/icons/dist/24/back';
+import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
+
 import { cn } from '@bem-react/classname';
 import { PANEL_HEADER } from 'panels/common';
 
 import CardsList from 'components/CardsList';
 
-import CardsList from 'components/CardsList';
-
 import './StudySet.css';
 
+const OS = platform();
 const cnStudySet = cn('StudySet');
 
 const cards = [
@@ -45,16 +50,31 @@ const cards = [
   },
 ];
 
-export const StudySet = ({ id, className }) => (
-  <Panel id={id} className={className}>
-    <PanelHeader>{ PANEL_HEADER }</PanelHeader>
-    <div className={cnStudySet()}>
-      <CardsList
-        cards={cards}
-      />
-    </div>
-  </Panel>
-);
+export const StudySet = ({ id, className }) => {
+  const customRef = React.useRef(null);
+
+  React.useEffect(() => {
+    customRef.current.ontouchstart = (e) => {
+      e.preventDefault();
+    };
+  }, []);
+
+  return (
+    <Panel id={id} className={className}>
+      <PanelHeader
+        addon={<HeaderButton>Назад</HeaderButton>}
+        left={<HeaderButton>{OS === IOS ? <Icon28ChevronBack /> : <Icon24Back />}</HeaderButton>}
+      >
+        {PANEL_HEADER}
+      </PanelHeader>
+      <div className={cnStudySet()} ref={customRef}>
+        <CardsList
+          cards={cards}
+        />
+      </div>
+    </Panel>
+  );
+};
 
 StudySet.propTypes = {
   id: PropTypes.string.isRequired,

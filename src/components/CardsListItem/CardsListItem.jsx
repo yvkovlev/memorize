@@ -8,22 +8,24 @@ import swipeUp from './images/swipe-up.svg';
 
 const cnCardsListItem = cn('CardsListItem');
 
-const CardsListItem = ({ content, type }) => {
+const CardsListItem = (props) => {
+  const { content, type, isFlippable } = props;
   const [isFlipped, setIsFlipped] = React.useState(false);
 
   const onTouchEnd = React.useCallback(
     () => {
-      if (type === 'middle') {
+      if (type === 'middle' && isFlippable) {
         setIsFlipped(prevValue => !prevValue);
       }
     },
-    [type],
+    [type, isFlippable],
   );
 
   return (
     <div
       className={cnCardsListItem('', { isFlipped })}
       onTouchEnd={onTouchEnd}
+      onClick={onTouchEnd}
       role="presentation"
       tabIndex={undefined}
     >
@@ -81,6 +83,7 @@ const CardsListItem = ({ content, type }) => {
 CardsListItem.propTypes = {
   content: PropTypes.shape(cardsListItemShape).isRequired,
   type: PropTypes.string.isRequired,
+  isFlippable: PropTypes.bool.isRequired
 };
 
 export default CardsListItem;
