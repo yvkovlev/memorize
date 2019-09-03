@@ -9,6 +9,7 @@ admin.initializeApp({
 });
 
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
 const verify = (req, res, next) => {
@@ -44,11 +45,13 @@ const verify = (req, res, next) => {
   next();
 };
 
+app.use(cors({ origin: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(verify);
 
+app.options('/token', cors());
 app.get('/token', async (req, res) => {
   const { uid } = req.query;
 

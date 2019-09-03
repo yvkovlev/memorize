@@ -1,30 +1,13 @@
 import { createAction, handleActions } from 'redux-actions';
-import { put, call, takeEvery } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 import { createSelector } from 'reselect';
+import { database } from 'utils/firebase';
 
 const defaultState = {
   isRequesting: false,
   list: [],
   activeSetId: null,
 };
-
-const mockSets = [
-  {
-    id: 1, title: 'IELTS 12.06.19', cards: new Array(2), photo: '/images/image.png',
-  },
-  {
-    id: 2, title: 'IELTS 10.06.19', cards: new Array(15), photo: '/images/image2.png',
-  },
-  {
-    id: 3, title: 'Awesome very loooooooooong title for set', cards: new Array(9),
-  },
-];
-
-const mockRequestSets = () => new Promise((resolve) => {
-  setTimeout(() => {
-    resolve(mockSets);
-  }, 300);
-});
 
 // Selectors
 
@@ -51,11 +34,31 @@ const requestSetsFailure = createAction(REQUEST_SETS_FAILURE);
 export const setActiveSet = createAction(SET_ACTIVE_SET);
 
 export function* requestSetsSaga() {
-  yield takeEvery(REQUEST_SETS, function* workerSaga() {
+  yield takeEvery(REQUEST_SETS, function* workerSaga(action) {
+    const userId = action.payload;
     yield put(requestSetsStarted());
     try {
-      const sets = yield call(mockRequestSets);
-      yield put(requestSetsSuccess(sets));
+      const snapshot = yield database.ref(`/user_sets/${userId}`).once('value');
+      const sets = snapshot.val();
+      let formattedSets;
+
+      if (!sets) {
+        formattedSets = [];
+      } else {
+        formattedSets = Object.entries(sets).map(([id, fields]) => {
+          const { title, photoUrl, cardsCount } = fields;
+          const cards = Array(cardsCount).fill(null);
+
+          return {
+            id,
+            title,
+            photoUrl,
+            cards,
+          };
+        });
+      }
+
+      yield put(requestSetsSuccess(formattedSets || []));
     } catch (err) {
       yield put(requestSetsFailure(err));
       throw new Error(err.message);
@@ -65,7 +68,7 @@ export function* requestSetsSaga() {
 
 // Reducer
 
-const reducer = handleActions(
+export const reducer = handleActions(
   {
     [REQUEST_SETS_STARTED]: state => ({
       ...state,
@@ -91,5 +94,3 @@ const reducer = handleActions(
   },
   defaultState,
 );
-
-export default reducer;

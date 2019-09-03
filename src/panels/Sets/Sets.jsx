@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
@@ -16,14 +16,34 @@ import {
 import {
   setActiveLayout as setActiveLayoutAction,
 } from 'redux/layout';
+import { userShape } from 'redux/user';
 import { setShape } from 'panels/Sets/Sets.shape';
 import { PANEL_HEADER } from 'panels/common';
 
 const cnSets = cn('Sets');
 
-const Sets = ({
-  id, sets, isRequesting, requestSets, setActiveSet, setActiveLayout,
-}) => {
+const Sets = (props) => {
+  const {
+    id,
+    sets,
+    requestSets,
+    setActiveSet,
+    setActiveLayout,
+    user,
+  } = props;
+
+  const [isBeforeRequestingSets, setIsBeforeRequestingSets] = useState(true);
+
+  const isRequestingUser = user.data === null || user.isRequesting;
+  const isRequesting = isBeforeRequestingSets || isRequestingUser || sets.isRequesting;
+
+  useEffect(() => {
+    if (user.data !== null && !user.isRequesting) {
+      setIsBeforeRequestingSets(false);
+      requestSets(user.data.id);
+    }
+  }, [user, requestSets]);
+
   const handleSetClick = useCallback(setId => () => {
     setActiveSet(setId);
     setActiveLayout({
@@ -31,10 +51,6 @@ const Sets = ({
       activePanel: 'viewSet',
     });
   }, [setActiveSet, setActiveLayout]);
-
-  useEffect(() => {
-    requestSets();
-  }, [requestSets]);
 
   const renderLoading = useCallback(() => {
     if (!isRequesting) {
@@ -49,7 +65,7 @@ const Sets = ({
   }, [isRequesting]);
 
   const renderEmptySets = useCallback(() => {
-    if (isRequesting || sets.length !== 0) {
+    if (isRequesting || sets.list.length !== 0) {
       return null;
     }
 
@@ -59,10 +75,10 @@ const Sets = ({
         <span className={cnSets('', ['subhead', 'subhead_secondary'])}>Но их можно легко добавить нажав на плюсик ниже :)</span>
       </div>
     );
-  }, [isRequesting, sets.length]);
+  }, [isRequesting, sets.list]);
 
   const renderSets = useCallback(() => {
-    if (isRequesting || sets.length === 0) {
+    if (isRequesting || sets.list.length === 0) {
       return null;
     }
 
@@ -70,7 +86,7 @@ const Sets = ({
       <>
         <span className={cnSets('Headline', ['headline'])}>Твои сеты</span>
         <SetsList
-          sets={sets}
+          sets={sets.list}
           onClick={handleSetClick}
         />
       </>
@@ -90,24 +106,41 @@ const Sets = ({
 };
 
 Sets.propTypes = {
+  // Own props
   id: PropTypes.string.isRequired,
-  isRequesting: PropTypes.bool.isRequired,
-  sets: PropTypes.arrayOf(setShape).isRequired,
+
+  // State to props
+  sets: PropTypes.shape({
+    list: PropTypes.arrayOf(setShape).isRequired,
+    isRequesting: PropTypes.bool.isRequired,
+  }).isRequired,
+  user: PropTypes.shape({
+    data: PropTypes.shape(userShape),
+    isRequesting: PropTypes.bool.isRequired,
+  }),
+
+  // Dispatch to props
   requestSets: PropTypes.func.isRequired,
   setActiveSet: PropTypes.func.isRequired,
   setActiveLayout: PropTypes.func.isRequired,
 };
 
+Sets.defaultProps = {
+  user: {
+    data: null,
+  },
+};
+
 const mapStateToProps = state => ({
-  isRequesting: state.sets.isRequesting,
-  sets: state.sets.list,
+  sets: state.sets,
+  user: state.user,
 });
 
-const mapDispatchToProps = dispatch => ({
-  requestSets: () => dispatch(requestSetsAction()),
-  setActiveSet: setId => dispatch(setActiveSetAction(setId)),
-  setActiveLayout: layout => dispatch(setActiveLayoutAction(layout)),
-});
+const mapDispatchToProps = {
+  requestSets: requestSetsAction,
+  setActiveSet: setActiveSetAction,
+  setActiveLayout: setActiveLayoutAction,
+};
 
 export default connect(
   mapStateToProps,

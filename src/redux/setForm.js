@@ -70,7 +70,7 @@ export function* requestSetSaga() {
 
 // Reducer
 
-const reducer = handleActions(
+export const reducer = handleActions(
   {
     [POPULATE_SET_FORM]: (state, { payload: { panelHeaderTitle, set } }) => ({
       ...state,
@@ -107,5 +107,3 @@ const reducer = handleActions(
   },
   initialState,
 );
-
-export default reducer;
