@@ -51,10 +51,10 @@ const cards = [
 ];
 
 export const StudySet = ({ id, className }) => {
-  const customRef = React.useRef(null);
+  const studySetRef = React.useRef(null);
 
   React.useEffect(() => {
-    customRef.current.ontouchstart = (e) => {
+    studySetRef.current.ontouchstart = (e) => {
       e.preventDefault();
     };
   }, []);
@@ -67,7 +67,7 @@ export const StudySet = ({ id, className }) => {
       >
         {PANEL_HEADER}
       </PanelHeader>
-      <div className={cnStudySet()} ref={customRef}>
+      <div className={cnStudySet()} ref={studySetRef}>
         <CardsList
           cards={cards}
         />

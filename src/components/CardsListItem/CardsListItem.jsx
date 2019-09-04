@@ -12,7 +12,7 @@ const CardsListItem = (props) => {
   const { content, type, isFlippable } = props;
   const [isFlipped, setIsFlipped] = React.useState(false);
 
-  const onTouchEnd = React.useCallback(
+  const flipCard = React.useCallback(
     () => {
       if (type === 'middle' && isFlippable) {
         setIsFlipped(prevValue => !prevValue);
@@ -24,8 +24,8 @@ const CardsListItem = (props) => {
   return (
     <div
       className={cnCardsListItem('', { isFlipped })}
-      onTouchEnd={onTouchEnd}
-      onClick={onTouchEnd}
+      onTouchEnd={flipCard}
+      onClick={flipCard}
       role="presentation"
       tabIndex={undefined}
     >
