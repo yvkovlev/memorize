@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { Tabbar, TabbarItem } from '@vkontakte/vkui';
 import { cn } from '@bem-react/classname';
@@ -19,10 +19,22 @@ const icons = new Map([
 
 const cnTabbar = cn('Tabbar');
 
-const AppTabbar = ({
-  icon, selected, hidden, onClick,
-}) => {
+const AppTabbar = (props) => {
+  const {
+    icon,
+    selected,
+    hidden,
+    onClick,
+    isSaveButtonActive,
+  } = props;
+
   const IconComponent = icons.get(icon);
+
+  const handleCreateButtonClick = useCallback(() => {
+    if (isSaveButtonActive || icon !== 'approve') {
+      onClick('control')();
+    }
+  }, [isSaveButtonActive, onClick, icon]);
 
   if (hidden) {
     return null;
@@ -36,9 +48,11 @@ const AppTabbar = ({
       >
         <Icon28Menu />
       </TabbarItem>
+      { /* Todo: Визуально обработать disabled кнопку */ }
       <TabbarItem
-        onClick={onClick('control')}
+        onClick={handleCreateButtonClick}
         selected={selected === 'control'}
+        className={cnTabbar('MiddleBar', { disabled: !isSaveButtonActive })}
       >
         <div className={cnTabbar('Icon')}>
           <IconComponent />
@@ -59,6 +73,7 @@ AppTabbar.propTypes = {
   selected: PropTypes.oneOf(['sets', 'control', 'profile']).isRequired,
   hidden: PropTypes.bool.isRequired,
   onClick: PropTypes.func.isRequired,
+  isSaveButtonActive: PropTypes.bool.isRequired,
 };
 
 AppTabbar.defaultProps = {

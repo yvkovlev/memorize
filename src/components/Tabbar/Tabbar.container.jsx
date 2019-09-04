@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setActiveLayout as setActiveLayoutAction } from 'redux/layout';
+import { initiateLayoutChange as initiateLayoutChangeAction } from 'redux/layout';
+import { isSetFormValidSelector } from 'redux/setForm';
 import { getNextActivePanel } from 'components/Tabbar/Tabbar.util';
 import BaseTabbar from './Tabbar';
 
@@ -12,11 +13,21 @@ const panelToIconConformance = new Map([
   ['viewSet', 'play'],
 ]);
 
-const Tabbar = ({ activeStory, activePanel, setActiveLayout }) => {
-  const switchLayout = story => () => setActiveLayout({
-    activeStory: story,
-    activePanel: getNextActivePanel(story, activePanel),
-  });
+const Tabbar = (props) => {
+  const {
+    activeStory,
+    activePanel,
+    initiateLayoutChange,
+    isSetFormValid,
+  } = props;
+
+  const switchLayout = useCallback(story => () => {
+    initiateLayoutChange({
+      activeStory: story,
+      activePanel: getNextActivePanel(story, activePanel),
+    });
+  }, [activePanel, initiateLayoutChange]);
+
   const icon = panelToIconConformance.get(activePanel);
 
   return (
@@ -24,15 +35,20 @@ const Tabbar = ({ activeStory, activePanel, setActiveLayout }) => {
       icon={icon}
       selected={activeStory}
       hidden={activePanel === 'studySet'}
+      isSaveButtonActive={isSetFormValid}
       onClick={switchLayout}
     />
   );
 };
 
 Tabbar.propTypes = {
-  setActiveLayout: PropTypes.func.isRequired,
+  // State to props
   activeStory: PropTypes.string.isRequired,
   activePanel: PropTypes.string,
+  isSetFormValid: PropTypes.bool.isRequired,
+
+  // Dispatch to props
+  initiateLayoutChange: PropTypes.func.isRequired,
 };
 
 Tabbar.defaultProps = {
@@ -42,10 +58,11 @@ Tabbar.defaultProps = {
 const mapStateToProps = state => ({
   activeStory: state.layout.activeStory,
   activePanel: state.layout.activePanel,
+  isSetFormValid: isSetFormValidSelector(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  setActiveLayout: layout => dispatch(setActiveLayoutAction(layout)),
+  initiateLayoutChange: layout => dispatch(initiateLayoutChangeAction(layout)),
 });
 
 export default connect(

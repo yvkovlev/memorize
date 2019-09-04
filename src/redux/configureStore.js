@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import { spawn } from 'redux-saga/effects';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import layout from 'redux/layout';
+import layout, { setActiveLayoutSaga } from 'redux/layout';
 import { reducer as setsReducer, requestSetsSaga } from 'redux/sets';
 import { reducer as setFormReducer } from 'redux/setForm';
 import { reducer as userReducer, authenticateUserSaga } from 'redux/user';
@@ -18,6 +18,7 @@ const reducer = combineReducers({
 function* root() {
   yield spawn(requestSetsSaga);
   yield spawn(authenticateUserSaga);
+  yield spawn(setActiveLayoutSaga);
 }
 
 const sagaMiddleware = createSagaMiddleware();

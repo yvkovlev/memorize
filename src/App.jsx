@@ -71,10 +71,13 @@ const App = (props) => {
 };
 
 App.propTypes = {
+  // State to props
   layout: PropTypes.shape({
     activeStory: PropTypes.string.isRequired,
     activePanel: PropTypes.string,
   }).isRequired,
+
+  // Dispatch to props
   requestUser: PropTypes.func.isRequired,
   receiveUser: PropTypes.func.isRequired,
 };
