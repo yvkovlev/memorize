@@ -9,7 +9,7 @@
     "lint:fix": "npx eslint './src/**/*.{js,jsx}' --fix",
     "build": "react-scripts build",
     "publish:prod": "react-scripts build && firebase deploy --only hosting:vk-app-memorize",
-    "publish:test": "REACT_APP_BUILD_TYPE=test react-scripts build && firebase deploy --only hosting:test-vk-app-memorize"
+    "publish:test": "REACT_APP_ENV=prod REACT_APP_BUILD_TYPE=test react-scripts build && firebase deploy --only hosting:test-vk-app-memorize"
   },
   "keywords": [],
   "author": "",
@@ -29,8 +29,11 @@
     "@vkontakte/icons": "^1.8.2",
     "@vkontakte/vk-connect": "^1.5.5",
     "@vkontakte/vkui": "^2.28.1",
+    "@vkontakte/vkui-connect-promise": "^0.2.1",
     "chalk": "^2.4.2",
     "core-js": "^3.1.4",
+    "firebase": "^6.5.0",
+    "lodash": "^4.17.15",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",

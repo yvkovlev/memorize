@@ -1,9 +1,10 @@
 import { createAction, handleActions } from 'redux-actions';
 import { takeEvery, put, call } from 'redux-saga/effects';
+import { createSelector } from 'reselect';
+import { cloneDeep } from 'lodash';
 
 const MIN_CARDS_COUNT = 2;
 export const cardInitialState = {
-  id: undefined,
   term: '',
   description: '',
 };
@@ -42,9 +43,12 @@ const REQUEST_SET_STARTED = 'memorize/REQUEST_SET_STARTED';
 const REQUEST_SET_SUCCESS = 'memorize/REQUEST_SET_SUCCESS';
 const REQUEST_SET_FAILURE = 'memorize/REQUEST_SET_FAILURE';
 
-export const POPULATE_SET_FORM = 'memorize/POPULATE_SET_FORM';
-export const SAVE_SET_STARTED = 'memorize/SAVE_SET_STARTED';
+const POPULATE_SET_FORM = 'memorize/POPULATE_SET_FORM';
+const SAVE_SET_STARTED = 'memorize/SAVE_SET_STARTED';
 const SAVE_SET_SUCCESS = 'memorize/SAVE_SET_SUCCESS';
+
+const CHANGE = 'memorize/setForm/CHANGE';
+const CLEAR = 'memorize/setForm/CLEAR';
 
 export const requestSet = createAction(REQUEST_SET);
 const requestSetStarted = createAction(REQUEST_SET_STARTED);
@@ -54,6 +58,9 @@ const requestSetFailure = createAction(REQUEST_SET_FAILURE);
 export const populateSetForm = createAction(POPULATE_SET_FORM);
 export const saveSetStarted = createAction(SAVE_SET_STARTED);
 export const saveSetSuccess = createAction(SAVE_SET_SUCCESS);
+
+export const changeSetForm = createAction(CHANGE);
+export const clearSetForm = createAction(CLEAR);
 
 export function* requestSetSaga() {
   yield takeEvery(REQUEST_SET, function* workerSaga(action) {
@@ -70,8 +77,15 @@ export function* requestSetSaga() {
 
 // Reducer
 
-const reducer = handleActions(
+export const reducer = handleActions(
   {
+    [CLEAR]: () => cloneDeep(initialState),
+
+    [CHANGE]: (state, { payload }) => ({
+      ...state,
+      set: { ...payload },
+    }),
+
     [POPULATE_SET_FORM]: (state, { payload: { panelHeaderTitle, set } }) => ({
       ...state,
       panelHeaderTitle,
@@ -108,4 +122,11 @@ const reducer = handleActions(
   initialState,
 );
 
-export default reducer;
+// Selectors
+
+const setFormSelector = state => state.setForm;
+
+export const isSetFormValidSelector = createSelector(
+  setFormSelector,
+  ({ set: { title, cards } }) => title !== '' && cards.every(card => card.title !== '' && card.description !== ''),
+);

@@ -1,12 +1,10 @@
-const getRequestFunc = method => (url = '', data = {}) => fetch(url, {
+const getRequestFunc = method => (url = '', data) => fetch(url, {
   method,
   headers: {
     'Content-Type': 'application/json',
   },
-  body: JSON.stringify(data),
+  body: data || null,
 });
 
-export default {
-  get: getRequestFunc('GET'),
-  post: getRequestFunc('POST'),
-};
+export const get = getRequestFunc('GET');
+export const post = getRequestFunc('POST');

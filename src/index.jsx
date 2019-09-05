@@ -10,9 +10,9 @@ import 'index.css';
 import App from './App';
 import configureStore from './redux/configureStore';
 
-connect.send('VKWebAppInit', {});
-
 const store = configureStore();
+
+connect.send('VKWebAppInit', {});
 
 ReactDOM.render(
   <Provider store={store}>

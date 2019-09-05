@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { cloneDeep, debounce } from 'lodash';
 import { connect } from 'react-redux';
 import { cn } from '@bem-react/classname';
 
@@ -12,7 +13,8 @@ import {
 import Icon16Add from '@vkontakte/icons/dist/16/add';
 
 import CardEdit from 'components/CardEdit';
-import { requestSet, cardInitialState } from 'redux/setForm';
+// import { userShape } from 'redux/user';
+import { requestSet, cardInitialState, changeSetForm } from 'redux/setForm';
 import { setFormShape } from './EditSet.shape';
 
 import defaultCover from './images/deafault.png';
@@ -21,8 +23,8 @@ const CREATE_SET = 'CREATE_SET';
 const UPDATE_SET = 'UPDATE_SET';
 
 const useScrollDown = (cardsCount) => {
-  const [memoCardsCount, setMemoCardsCount] = React.useState(cardsCount);
-  React.useEffect(() => {
+  const [memoCardsCount, setMemoCardsCount] = useState(cardsCount);
+  useEffect(() => {
     if (cardsCount > memoCardsCount) {
       window.scrollTo({
         top: document.body.scrollHeight,
@@ -35,27 +37,62 @@ const useScrollDown = (cardsCount) => {
 
 const cnEditSet = cn('EditSet');
 
-const EditSet = ({ id, setForm }) => {
-  const setId = setForm.set.id;
+const EditSet = (props) => {
+  const {
+    id,
+    setForm: { set },
+    requestSet: requestSetAction,
+    changeSet: changeSetAction,
+  } = props;
+
+  const setId = set.id;
   const editSetState = setId === undefined ? CREATE_SET : UPDATE_SET;
 
-  const [internalSet, applyInternalSet] = React.useState(setForm.set);
-  const onAddCard = React.useCallback(() => {
-    applyInternalSet(prevState => ({
-      ...prevState,
+  const debouncedChangeSet = debounce(changeSetAction, 500);
+
+  const [innerTitle, setInnerTitle] = useState(set.title);
+  const handleTitleChange = useCallback((event) => {
+    const newValue = event.target.value;
+    setInnerTitle(newValue);
+    debouncedChangeSet({
+      ...set,
+      title: newValue,
+    });
+  }, [debouncedChangeSet, set]);
+
+  const handleCardChange = useCallback(targetCardIndex => (term = '', description = '') => {
+    const newCards = cloneDeep(set.cards).map((card, index) => {
+      if (targetCardIndex !== index) {
+        return card;
+      }
+
+      return {
+        term,
+        description,
+      };
+    });
+    changeSetAction({
+      ...set,
+      cards: newCards,
+    });
+  }, [changeSetAction, set]);
+
+  const onAddCard = useCallback(() => {
+    changeSetAction({
+      ...set,
       cards: [
-        ...prevState.cards,
+        ...set.cards,
         { ...cardInitialState },
       ],
-    }));
-  }, []);
-  useScrollDown(internalSet.cards.length);
+    });
+  }, [changeSetAction, set]);
+  useScrollDown(set.cards.length);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (editSetState === UPDATE_SET) {
-      requestSet(setId);
+      requestSetAction(setId);
     }
-  }, [editSetState, setId]);
+  }, [requestSetAction, editSetState, setId]);
 
   return (
     <Panel id={id}>
@@ -68,6 +105,8 @@ const EditSet = ({ id, setForm }) => {
               type="text"
               placeholder="Название сета"
               className={cnEditSet('HeaderInput', ['title-xl'])}
+              value={innerTitle}
+              onChange={handleTitleChange}
             />
             <span className={cnEditSet('Tip', ['caption-s'])}>Кликни для редактирования</span>
           </div>
@@ -76,9 +115,10 @@ const EditSet = ({ id, setForm }) => {
           </div>
         </Group>
 
-        { internalSet.cards.map((card, index) => (
+        { set.cards.map((card, index) => (
           <CardEdit
             key={card.id || index}
+            onChange={debounce(handleCardChange(index), 200)}
           />
         ))
         }
@@ -97,16 +137,31 @@ const EditSet = ({ id, setForm }) => {
 };
 
 const mapStateToProps = state => ({
+  user: state.user,
   setForm: state.setForm,
 });
 
 const mapDispatchToProps = {
   requestSet,
+  changeSet: changeSetForm,
 };
 
 EditSet.propTypes = {
+  // Own props
   id: PropTypes.string.isRequired,
-  setForm: PropTypes.shape(setFormShape).isRequired,
+
+  // State to props
+  setForm: PropTypes.shape(setFormShape),
+  // user: PropTypes.shape(userShape),
+
+  // Dispatch to props
+  requestSet: PropTypes.func.isRequired,
+  changeSet: PropTypes.func.isRequired,
+};
+
+EditSet.defaultProps = {
+  setForm: undefined,
+  // user: undefined,
 };
 
 export default connect(
