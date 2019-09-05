@@ -12,5 +12,4 @@
     transform: translateY(calc((-1) * var(--cards-height) * var(--card-number) + (-1) * var(--cards-vertical-margin) * var(--card-number) + var(--cards-shift) * var(--card-number) / var(--card-number)));
     transition: all 0.2s ease-in-out;
     padding: 0 12px;
-    transform-style: preserve-3d;
 }
