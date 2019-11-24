@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
-import ZingTouch from 'zingtouch/src/ZingTouch';
 
 import CardsListItem from 'components/CardsListItem';
+
+import { region, swipeGesture } from 'utils/zingTouchConfig';
 
 import defaultCover from './images/default.png';
 import doneCover from './images/done.png';
@@ -28,18 +29,15 @@ const staticCards = [
   },
 ];
 
-const zingTouch = new ZingTouch.Region(document.body);
-const swipeGesture = new ZingTouch.Swipe({
-  maxRestTime: 100,
-});
-
 const CardsList = (props) => {
   const { cards } = props;
   const [cardNumber, setCardNumber] = React.useState(0);
   const cardListRef = React.useRef(null);
 
   React.useLayoutEffect(() => {
-    zingTouch.bind(cardListRef.current, swipeGesture, (e) => {
+    const swipeArea = cardListRef.current;
+
+    region.bind(swipeArea, swipeGesture, (e) => {
       const direction = e.detail.data[0].currentDirection;
 
       if (direction > 45 && direction <= 135) {
@@ -50,9 +48,9 @@ const CardsList = (props) => {
     });
 
     return () => {
-      zingTouch.unbind(cardListRef.current, swipeGesture);
+      region.unbind(swipeArea);
     };
-  }, []);
+  }, [cards.length]);
 
   return (
     <div className={cnCardsList()} ref={cardListRef}>

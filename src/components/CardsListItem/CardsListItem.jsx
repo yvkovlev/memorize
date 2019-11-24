@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { cn } from '@bem-react/classname';
 
+import { region, swipeGesture, tapGesture } from 'utils/zingTouchConfig';
 import { cardsListItemShape } from './CardsListItem.shape';
 
 import swipeUp from './images/swipe-up.svg';
@@ -10,26 +11,44 @@ const cnCardsListItem = cn('CardsListItem');
 
 const CardsListItem = (props) => {
   const { content, type, isFlippable } = props;
-  const [isFlipped, setIsFlipped] = React.useState(false);
+  const [flipCount, setFlipCount] = React.useState(0);
+  const cardListItemRef = React.useRef(null);
 
-  const flipCard = React.useCallback(
-    () => {
+  React.useLayoutEffect(() => {
+    const swipeArea = cardListItemRef.current;
+
+    region.bind(swipeArea, swipeGesture, (e) => {
+      const direction = e.detail.data[0].currentDirection;
+
       if (type === 'middle' && isFlippable) {
-        setIsFlipped(prevValue => !prevValue);
+        // eslint-disable-next-line no-mixed-operators
+        if (direction >= 0 && direction < 45 || direction > 315 && direction <= 360) {
+          setFlipCount(prevValue => prevValue + 1);
+        } else if (direction > 135 && direction < 225) {
+          setFlipCount(prevValue => prevValue - 1);
+        }
       }
-    },
-    [type, isFlippable],
-  );
+    });
+
+    region.bind(swipeArea, tapGesture, () => {
+      if (type === 'middle' && isFlippable) {
+        setFlipCount(prevValue => prevValue + 1);
+      }
+    });
+
+    return () => {
+      region.unbind(swipeArea);
+    };
+  }, [isFlippable, type]);
 
   return (
     <div
-      className={cnCardsListItem('', { isFlipped })}
-      onTouchEnd={flipCard}
-      onClick={flipCard}
+      className={cnCardsListItem()}
       role="presentation"
       tabIndex={undefined}
+      ref={cardListItemRef}
     >
-      <div className={cnCardsListItem('Flipper')}>
+      <div className={cnCardsListItem('Flipper')} style={{ '--flipCount': flipCount }}>
         <div className={cnCardsListItem('Front')}>
           <div className={cnCardsListItem('Content')}>
             <div className={cnCardsListItem('PhotoWrapper')} style={{ backgroundImage: `url(${content.photoURL})` }} />
@@ -83,7 +102,7 @@ const CardsListItem = (props) => {
 CardsListItem.propTypes = {
   content: PropTypes.shape(cardsListItemShape).isRequired,
   type: PropTypes.string.isRequired,
-  isFlippable: PropTypes.bool.isRequired
+  isFlippable: PropTypes.bool.isRequired,
 };
 
 export default CardsListItem;
