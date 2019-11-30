@@ -32,14 +32,18 @@ const CardsListItem = (props) => {
 
     region.bind(swipeArea, tapGesture, () => {
       if (type === 'middle' && isFlippable) {
-        setFlipCount(prevValue => prevValue + 1);
+        if (flipCount % 2 === 0) {
+          setFlipCount(prevValue => prevValue + 1);
+        } else {
+          setFlipCount(prevValue => prevValue - 1);
+        }
       }
     });
 
     return () => {
       region.unbind(swipeArea);
     };
-  }, [isFlippable, type]);
+  }, [flipCount, isFlippable, type]);
 
   return (
     <div
